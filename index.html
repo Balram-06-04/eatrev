@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" href="images/logo.webp" type="image/x-icon" />
+  <title>EatRev - Street Food You Can Trust</title>
+
+  <meta name="google-site-verification" content="D3r8rCl-I6Oe1PUDJL4AA6VRBOjzIoP7tLcX_ytLRxQ" />
+  <meta name="description"
+    content="EatRev - Connecting food lovers with authentic street flavors you can trust. Discover the best street food vendors and reviews." />
+  <meta name="keywords" content="Street Food, Food Vendors, Food Reviews, Samosa, Momos, Chaat, Dosa" />
+  <meta name="robots" content="index, follow" />
+
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-sA+e2atTH3S1CkYlOZbA5SX2BVoJxQw5xN4Z8V+4rY8=" crossorigin="" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-o9N1j7k1PjU4v1lqU1IpN8sl4gMMsPgmH0T9rItS9nY=" crossorigin=""></script>
+</head>
+
+
+<body>
+  <!-- Navbar -->
+  <nav id="header">
+    <div class="logo">
+      <div class="img">
+        <img src="images/logo.webp" alt="img" />
+      </div>
+      <div class="header">
+        <p>EatRev</p>
+        <p>Tasty Food</p>
+      </div>
+    </div>
+    <div class="nav-links">
+      <span id="search">🔍</span>
+      <span id="notification">🔔</span>
+      <span id="account">👤</span>
+      <button id="sign-in">Sign In</button>
+      <span id="option" style="font-size: 2.2rem; margin-right: 2px">≡</span>
+    </div>
+    <!-- Back Button -->
+    <!-- <button id="back-btn" class="back-btn" style="display:none;">⬅ Back</button> -->
+
+    <!-- Dropdown Menu -->
+    <div class="dropdown" id="dropdownMenu">
+      <a href="home.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="main-section" class="hero">
+    <h1 style="color: #ffc400; font-size: 2rem; font-family: Verdana, Geneva, Tahoma, sans-serif; margin: 0px;">Street
+      Food</h1>
+    <h2
+      style="color: #ffb300; font-weight: bold; font-size: 1.5rem; margin: 0px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+      You Can Trust</h2>
+    <p style="text-align: center; padding: 0px 10px">Connecting food lovers with authentic street flavors you can trust.
+    </p>
+
+    <div class="hero-buttons transparent-btn">
+      <!-- Find Vendors Toggle Button -->
+      <button onclick="toggleVendors()" id="find-vendors-btn">Book Vendors</button>
+
+      <button id="vendor-register">Become a Vendor</button>
+      <button id="upload-reviews" class="btn">Upload Reviews</button>
+    </div>
+  </section>
+
+  <!-- Login section -->
+  <div class="login-container" style="display: none;margin:0 auto;">
+    <form class="login-form">
+      <h2>Login</h2>
+
+      <div class="input-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="Enter your email" required />
+      </div>
+
+      <div class="input-group">
+        <label for="password">Password</label>
+        <div class="password-wrapper">
+          <input type="password" id="password" placeholder="Enter your password" required />
+          <span id="togglePassword">👁️</span>
+        </div>
+      </div>
+
+      <button type="submit" class="login-btn">Login</button>
+
+      <div class="extra-links">
+        <a href="#">Forgot password?</a>
+        <span> • </span>
+        <a href="#">Create account</a>
+      </div>
+    </form>
+  </div>
+
+  <!-- Finding Vendors: -->
+  <!-- Event Vendor Listing Section -->
+  <!-- Vendor Section - hidden by default -->
+  <section id="event-vendor-section" style="display: none;">
+    <h2>Available Food Vendors for Event Booking</h2>
+    <div class="event-vendor-list">
+      <div class="event-vendor-card">
+        <h3>BSc Tiffin Centre</h3>
+        <p><strong>Special Dishes:</strong> Samosa, Chaat</p>
+        <p><strong>Contact:</strong> +91 98765 43210</p>
+      </div>
+      <div class="event-vendor-card">
+        <h3>Ballu Fast Food</h3>
+        <p><strong>Special Dishes:</strong> Dosa, Idli</p>
+        <p><strong>Contact:</strong> +91 99887 12345</p>
+      </div>
+      <div class="event-vendor-card">
+        <h3>Sanjeeb Momo Wala</h3>
+        <p><strong>Special Dishes:</strong> Momos, Chowmein</p>
+        <p><strong>Contact:</strong> +91 88990 45678</p>
+      </div>
+      <div class="event-vendor-card">
+        <h3>Piyush Spicy Stall</h3>
+        <p><strong>Special Dishes:</strong> Golgappe, Chatt</p>
+        <p><strong>Contact:</strong> +91 77665 33221</p>
+      </div>
+      <div class="event-vendor-card">
+        <h3>Anand Veg Delight</h3>
+        <p><strong>Special Dishes:</strong> Paneer Roll, Kathi Kabab</p>
+        <p><strong>Contact:</strong> +91 90011 77889</p>
+      </div>
+      <div class="event-vendor-card">
+        <h3>RK Snacks Corner</h3>
+        <p><strong>Special Dishes:</strong> Bread Pakora, Jalebi</p>
+        <p><strong>Contact:</strong> +91 90909 11122</p>
+      </div>
+      <div class="event-vendor-card">
+        <h3>Foodie Junction</h3>
+        <p><strong>Special Dishes:</strong> Pav Bhaji, Sandwich</p>
+        <p><strong>Contact:</strong> +91 88888 00011</p>
+      </div>
+      <div class="event-vendor-card">
+        <h3>Sharma Caterers</h3>
+        <p><strong>Special Dishes:</strong> Veg Biryani, Malai Kofta</p>
+        <p><strong>Contact:</strong> +91 77777 44455</p>
+      </div>
+      <div class="event-vendor-card">
+        <h3>Desi Zaika</h3>
+        <p><strong>Special Dishes:</strong> Rajma Chawal, Kadhi Pakoda</p>
+        <p><strong>Contact:</strong> +91 66666 33322</p>
+      </div>
+      <div class="event-vendor-card">
+        <h3>Zaika Caterers</h3>
+        <p><strong>Special Dishes:</strong> Veg Thali, Raita</p>
+        <p><strong>Contact:</strong> +91 55555 22233</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vendor Registration -->
+  <section class="vendor-registration" id="check">
+
+    <div class="container">
+      <h2>Vendor Registration</h2>
+      <form id="vendorForm">
+        <label for="stallName">Stall Name</label>
+        <input type="text" id="stallName" required>
+
+        <label for="ownerName">Owner Name</label>
+        <input type="text" id="ownerName" required>
+
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" required pattern="[0-9]{10}" placeholder="10-digit number">
+
+        <label for="email">Email</label>
+        <input type="email" id="email" required>
+
+        <label for="location">Location</label>
+        <input type="text" id="location" required>
+
+        <label for="state">State</label>
+        <input type="text" id="state" required>
+
+        <label for="city">City</label>
+        <input type="text" id="city" required>
+
+        <label for="accountNumber">Bank Account Number</label>
+        <input type="text" id="accountNumber" required pattern="[0-9]{9,18}">
+
+        <label for="ifsc">IFSC Code</label>
+        <input type="text" id="ifsc" required pattern="[A-Za-z]{4}[0-9]{7}">
+
+        <label for="description">Special Dishes:</label>
+        <textarea id="description"></textarea>
+
+        <button type="submit">Register Vendor</button>
+      </form>
+      <p class="success" id="successMsg" style="display: none;">Vendor Registered Successfully ✅</p>
+    </div>
+  </section>
+
+
+
+  <!-- Review Section -->
+  <div class="getInput hidden" id="two-part">
+    
+    <section id="app-content">
+      <h2
+        style="text-align: center;color: rgb(40, 40, 40); text-decoration: underline; margin-bottom: 13px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+        Add Your Street Food Review
+      </h2>
+
+      <form id="review-form" novalidate
+        style="color: #f1c13b; font-weight: 600; font-family: 'Times New Roman', Times, serif;">
+
+        <label for="stall-name">Stall Name</label>
+        <input type="text" id="stall-name" placeholder="e.g. Momo Ghar" required style="color: #000; font-weight: 600">
+
+        <label for="stall-location">Famous Place / Landmark</label>
+        <input type="text" id="stall-location" placeholder="e.g. Near Bus Stand" required
+          style="color: #000; font-weight: 600">
+
+        <label for="vendor-contact">
+          Vendor Contact No.
+          <span style="font-weight: normal; font-size: 13px;">(optional)</span>
+        </label>
+
+        <input type="tel" id="vendor-contact" placeholder="e.g. 9876543210" style="color:#000; font-weight:600"
+          pattern="[0-9]{10}" maxlength="10" inputmode="numeric" title="Please enter a 10-digit phone number"
+          oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+
+
+        <label for="review-text">Review</label>
+        <textarea id="review-text" maxlength="500" placeholder="Share your experience..." required
+          style="color: #000; font-weight: 600"></textarea>
+
+        <!-- Worth it toggle -->
+        <label>Was it worth the money?</label>
+        <div style="margin-bottom:10px;">
+          <label>
+            <input type="radio" name="worth-it" value="yes" checked> Yes
+          </label>
+          <label style="margin-left:15px;">
+            <input type="radio" name="worth-it" value="no"> No
+          </label>
+        </div>
+
+        <!-- Hygiene feedback -->
+        <label>Hygiene Condition</label>
+        <select id="hygiene-rating" aria-label="Select hygiene">
+          <option value="" disabled selected>Select Hygiene</option>
+          <option value="clean">✅ Clean</option>
+          <option value="average">⚠️ Average</option>
+          <option value="dirty">❌ Dirty</option>
+        </select>
+
+        <label for="review-rating" style="margin-top: 8px;">Overall Rating</label>
+        <select id="review-rating" required aria-required="true" aria-label="Select rating">
+          <option value="" disabled selected>Select rating</option>
+          <option value="5">5 - Excellent</option>
+          <option value="4">4 - Very Good</option>
+          <option value="3">3 - Good</option>
+          <option value="2">2 - Fair</option>
+          <option value="1">1 - Poor</option>
+        </select>
+
+        <!-- Upload -->
+        <section id="upload-photo" style="border-radius:10px ;">
+          <label for="review-photo">Upload photo</label>
+          <button type="button" id="camera-button" class="photo-btn">📸 Open Camera</button>
+          <input type="file" id="review-photo" accept="image/*" capture="environment" style="display: none;">
+
+          <button type="button" id="choose-button" class="photo-btn">📁 Choose File</button>
+          <input type="file" id="photo-file" accept="image/*" style="display: none;">
+          <div id="photo-preview-container"></div>
+        </section>
+
+      </form>
+
+      <button id="review-submit" type="button" class="submit-btn">✅ Submit Review</button>
+      <div id="review-error" class="error"></div>
+    </section>
+    <section id="img-content" style="height: 800px;border: 2px;">
+      <div class="desc1">
+        <p class="gradient-text">The real taste of a city lives in its streets. Crispy, spicy, sweet, or savory—every
+          bite is a burst of culture, color, and character.</p>
+        <img src="images/streetfood4.webp" alt="Street food stall with variety of snacks">
+      </div>
+      <div class="desc2">
+        <p class="gradient-text">Vendors aren’t just cooks—they're artists. They mix tradition and creativity, serving
+          up joy, laughter, and stories with every dish they make under open skies.</p>
+        <img src="images/streetfood5.webp" alt="Vendor preparing food at night market">
+      </div>
+    </section>
+  </div>
+
+
+  </div>
+  </section>
+
+  <!-- Search Section -->
+  <section class="search-section" id="search-food">
+    <h1 style="
+          font-size: 2rem;
+          font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS',
+            sans-serif;
+          text-decoration: overline;
+        ">
+      Find Your Perfect
+    </h1>
+    <h2 style="
+          font-size: 2rem;
+          text-decoration: underline;
+          color: #ff9100;
+          font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial,
+            sans-serif;
+        ">
+      Street Food
+    </h2>
+    <p style="
+          font-size: 1.1rem;
+          color: rgb(95, 95, 95);
+          font-family: 'Times New Roman', Times, serif;
+          font-weight: 600;
+          font-style: italic;
+          margin-bottom: 5px;
+        ">
+      Search by location, food Items or specific dishes to discover amazing
+      street food vendors near you
+    </p>
+    <input type="text" placeholder="Enter Your Location" style="width: 100%" />
+    <input type="text" placeholder="Search for food, vendors, or dishes" style="width: 100%" />
+    <div class="filters">
+      <button>Rating</button>
+      <button>Veg</button>
+      <button>Non-Veg</button>
+      <button>Price</button>
+    </div>
+    <button class="search" style="
+          margin-top: 1rem;
+          width: 100%;
+          background: #ff5722;
+          color: white;
+          border: none;
+          border-radius: 5px;
+        ">
+      Search
+    </button>
+  </section>
+  <div class="popular-tags">
+    <h1 style="
+          color: rgb(67, 64, 64);
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        ">
+      Popular Searches
+    </h1>
+    <div class="tags">
+      <span>Street Food</span>
+      <span>Samosa</span>
+      <span>Chaat</span>
+      <span>Dosa</span>
+      <span>Pani Puri</span>
+      <span>Momos</span>
+      <span>Jalebi</span>
+    </div>
+  </div>
+
+
+  <div class="top-rated"
+    style="height: 10px;width: 100%;font-weight: 700;font-family: 'Courier New', Courier, monospace;margin: 10px 0px 0px 0px;text-align: center;padding: 20px;">
+    <h3>Top Rated Reviews...</h3>
+  </div>
+  <!-- Vendor Grid -->
+  <section style="padding-top: 0;" class="vendor-grid">
+    <div class="vendor-card">
+      <div class="vendor-photo">
+        <img src="images/samosa.webp" alt="samosa" />
+      </div>
+      <div class="vendor-name">BSc Tiffin Centre ⭐⭐⭐⭐</div>
+      <p>Special Items: Samosa, Chaat</p>
+      <div class="vendor-actions">
+        <button>👍 Worth it</button>
+        <button>👎 Not Satisfy</button>
+      </div>
+    </div>
+    <div class="vendor-card">
+      <div class="vendor-photo">
+        <img src="images/fastfood.webp" alt="dosa" />
+      </div>
+      <div class="vendor-name">Ballu Fast Food ⭐⭐⭐</div>
+      <p>Special Items: Dosa, Idli</p>
+      <div class="vendor-actions">
+        <button>👍 Worth it</button>
+        <button>👎 Not Satisfy</button>
+      </div>
+    </div>
+    <div class="vendor-card">
+      <div class="vendor-photo">
+        <img src="images/momo.webp" alt="momo" />
+      </div>
+      <div class="vendor-name">Sanjeeb Momo Wala ⭐⭐⭐⭐</div>
+      <p>Special Items: Momos, Chowmein</p>
+      <div class="vendor-actions">
+        <button>👍 Worth it</button>
+        <button>👎 Not Satisfy</button>
+      </div>
+    </div>
+    <div class="vendor-card">
+      <div class="vendor-photo">
+        <img src="images/streetfood3.webp" alt="golgappe" />
+      </div>
+      <div class="vendor-name">Piyush Spicy Stall ⭐⭐⭐⭐</div>
+      <p>Special Items: Golgappe, Chatt</p>
+      <div class="vendor-actions">
+        <button>👍 Worth it</button>
+        <button>👎 Not Satisfy</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- New user reviews -->
+  <section style="padding-top: 0;width: 90%;margin: auto;" class="user-review-grid">
+    <div class="review-grid"></div>
+  </section>
+
+  <!-- Map Section -->
+  <!-- <section class="map-section">
+    <h2>Your Near Food Stall</h2>
+    <div id="map" style="height: 400px; border-radius: 10px"></div>
+  </section> -->
+  <h2 style="text-align: center;color: #575757;">Your Near Food Stall</h2>
+
+  <div class="map-container">
+  <iframe
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3702.199595657844!2d83.1661!3d19.9075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a229c9a0d5d2c8f%3A0x8e0f7f1fcecb5b9c!2sBhawanipatna%2C%20Odisha!5e0!3m2!1sen!2sin!4v1697897432"
+    allowfullscreen=""
+    loading="lazy"
+  ></iframe>
+</div>
+
+
+  <!-- Why Choose Us -->
+  <section class="features">
+    <div class="feature">Interactive Map Search</div>
+    <div class="feature">Smart Rating System</div>
+    <div class="feature">Instant Photo Upload</div>
+    <div class="feature">Hygiene Certification</div>
+    <div class="feature">Live Notification</div>
+    <div class="feature">Performance Analytics</div>
+  </section>
+
+  <!-- Join Community -->
+  <section class="join">
+    <button>Join Community</button>
+  </section>
+  <script src="script.js"></script>
+</body>
+
+</html>

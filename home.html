@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EatRev | Home</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fffaf4;
+      color: #333;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: url('https://images.unsplash.com/photo-1555992336-03a23c1e4f4b') center/cover no-repeat;
+      height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      position: relative;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+    }
+
+    .hero-content h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      color: #fdf2e9;
+    }
+
+    .hero-content p {
+      font-size: 1.2rem;
+      margin-bottom: 25px;
+    }
+
+    .hero-content button {
+      padding: 14px 28px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      background: #e67e22;
+      color: #fff;
+      transition: background 0.3s ease;
+    }
+
+    .hero-content button:hover {
+      background: #d35400;
+    }
+
+    /* Search Bar */
+    .search-section {
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .search-section input {
+      padding: 12px;
+      width: 300px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      margin-right: 10px;
+    }
+
+    .search-section button {
+      padding: 12px 20px;
+      background: #e67e22;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    /* Featured Reviews */
+    .reviews {
+      max-width: 1100px;
+      margin: 50px auto;
+      padding: 20px;
+    }
+
+    .reviews h2 {
+      text-align: center;
+      color: #d35400;
+      margin-bottom: 30px;
+    }
+
+    .review-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .review-card {
+      background: #fff6ee;
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0px 4px 10px rgba(0,0,0,0.08);
+    }
+
+    .review-card h3 {
+      margin: 10px 0;
+      color: #e67e22;
+    }
+
+    /* Vendor Section */
+    .vendor {
+      background: #fdf2e9;
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .vendor h2 {
+      color: #d35400;
+    }
+
+    .vendor button {
+      margin-top: 20px;
+      padding: 14px 28px;
+      background: #e67e22;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    /* Footer */
+    footer {
+      background: #333;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Discover & Review Street Food Near You</h1>
+      <p>Find hidden gems, share your experience, and book vendors for your events.</p>
+        <a href="index.html#two-part">
+            <button>Explore Now</button>
+        </a>
+    </div>
+  </section>
+
+  <!-- Search Section -->
+  <section class="search-section">
+    <input type="text" placeholder="Search for stalls or vendors...">
+    <a href="index.html#search-food">
+
+        <button>Search</button>
+    </a>
+  </section>
+
+  <!-- Featured Reviews -->
+  <section class="reviews">
+    <h2>Popular Street Food Reviews</h2>
+    <div class="review-grid">
+      <div class="review-card">
+        <h3>Chaat Corner</h3>
+        <p>“Crispy, spicy, and full of flavors! Must try in Bhawanipatna.”</p>
+      </div>
+      <div class="review-card">
+        <h3>Momo Hut</h3>
+        <p>“Steamed momos with spicy chutney – perfect evening snack!”</p>
+      </div>
+      <div class="review-card">
+        <h3>Tea Point</h3>
+        <p>“Refreshing ginger tea that keeps you coming back every day.”</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vendor Booking Section -->
+  <section class="vendor">
+    <h2>Are You a Food Vendor?</h2>
+    <p>Register your stall with EatRev and start getting bookings instantly!</p>
+    <a href="index.html#check">
+
+        <button>Register as Vendor</button>
+    </a>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 EatRev | All Rights Reserved</p>
+  </footer>
+</body>
+</html>

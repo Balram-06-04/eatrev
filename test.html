@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vendor Registration</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #218838;
+        }
+
+        .success {
+            text-align: center;
+            color: green;
+            font-weight: bold;
+            display: none;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Vendor Registration</h2>
+        <form id="vendorForm">
+            <label for="stallName">Stall Name</label>
+            <input type="text" id="stallName" required>
+
+            <label for="ownerName">Owner Name</label>
+            <input type="text" id="ownerName" required>
+
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" required pattern="[0-9]{10}" placeholder="10-digit number">
+
+            <label for="email">Email</label>
+            <input type="email" id="email" required>
+
+            <label for="location">Location</label>
+            <input type="text" id="location" required>
+
+            <label for="state">State</label>
+            <input type="text" id="state" required>
+
+            <label for="city">City</label>
+            <input type="text" id="city" required>
+
+            <label for="accountNumber">Bank Account Number</label>
+            <input type="text" id="accountNumber" required pattern="[0-9]{9,18}">
+
+            <label for="ifsc">IFSC Code</label>
+            <input type="text" id="ifsc" required pattern="[A-Za-z]{4}[0-9]{7}">
+
+            <label for="description">Special Dishes:</label>
+            <textarea id="description"></textarea>
+
+            <button type="submit">Register Vendor</button>
+        </form>
+        <p class="success" id="successMsg">Vendor Registered Successfully ✅</p>
+    </div>
+
+    <script>
+        const form = document.getElementById("vendorForm");
+        const successMsg = document.getElementById("successMsg");
+
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            // Collect form data
+            const vendorData = {
+                stallName: document.getElementById("stallName").value,
+                ownerName: document.getElementById("ownerName").value,
+                phone: document.getElementById("phone").value,
+                email: document.getElementById("email").value,
+                location: document.getElementById("location").value,
+                city: document.getElementById("city").value,
+                state: document.getElementById("state").value,
+                accountNumber: document.getElementById("accountNumber").value,
+                ifsc: document.getElementById("ifsc").value,
+                gst: document.getElementById("gst").value,
+                description: document.getElementById("description").value
+            };
+
+            console.log("Vendor Data Submitted:", vendorData);
+
+            // Show success message
+            successMsg.style.display = "block";
+
+            // Clear form
+            form.reset();
+        });
+    </script>
+</body>
+
+</html>
