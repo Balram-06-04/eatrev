@@ -206,14 +206,14 @@
 
   <!-- Review Section -->
   <div class="getInput hidden" id="two-part">
-    
+
     <section id="app-content">
       <h2
         style="text-align: center;color: rgb(40, 40, 40); text-decoration: underline; margin-bottom: 13px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
         Add Your Street Food Review
       </h2>
 
-      <form id="review-form" novalidate
+      <form id="review-form" novalidate enctype="multipart/form-data"
         style="color: #f1c13b; font-weight: 600; font-family: 'Times New Roman', Times, serif;">
 
         <label for="stall-name">Stall Name</label>
@@ -222,33 +222,15 @@
         <label for="stall-location">Famous Place / Landmark</label>
         <input type="text" id="stall-location" placeholder="e.g. Near Bus Stand" required
           style="color: #000; font-weight: 600">
-
-        <label for="vendor-contact">
-          Vendor Contact No.
-          <span style="font-weight: normal; font-size: 13px;">(optional)</span>
-        </label>
-
-        <input type="tel" id="vendor-contact" placeholder="e.g. 9876543210" style="color:#000; font-weight:600"
-          pattern="[0-9]{10}" maxlength="10" inputmode="numeric" title="Please enter a 10-digit phone number"
-          oninput="this.value = this.value.replace(/[^0-9]/g, '')">
-
+        <label for="dish-name">Dish Name</label>
+        <input type="text" id="dish-name" placeholder="e.g. Chowmin, Momo.." required
+          style="color: #000; font-weight: 600">
 
         <label for="review-text">Review</label>
         <textarea id="review-text" maxlength="500" placeholder="Share your experience..." required
           style="color: #000; font-weight: 600"></textarea>
 
-        <!-- Worth it toggle -->
-        <label>Was it worth the money?</label>
-        <div style="margin-bottom:10px;">
-          <label>
-            <input type="radio" name="worth-it" value="yes" checked> Yes
-          </label>
-          <label style="margin-left:15px;">
-            <input type="radio" name="worth-it" value="no"> No
-          </label>
-        </div>
-
-        <!-- Hygiene feedback -->
+                  <!-- Hygiene feedback -->
         <label>Hygiene Condition</label>
         <select id="hygiene-rating" aria-label="Select hygiene">
           <option value="" disabled selected>Select Hygiene</option>
@@ -267,6 +249,19 @@
           <option value="1">1 - Poor</option>
         </select>
 
+        <!-- Worth it toggle -->
+        <label>Was it worth the money?</label>
+        <div id="worthIt" style="margin-bottom:10px;">
+          <label>
+            <input type="radio" name="worth-it" value="yes" checked> Yes
+          </label>
+          <label style="margin-left:15px;">
+            <input type="radio" name="worth-it" value="no"> No
+          </label>
+        </div>
+
+
+
         <!-- Upload -->
         <section id="upload-photo" style="border-radius:10px ;">
           <label for="review-photo">Upload photo</label>
@@ -278,9 +273,9 @@
           <div id="photo-preview-container"></div>
         </section>
 
+        <button id="review-submit" type="submit" class="submit-btn">✅ Submit Review</button>
       </form>
 
-      <button id="review-submit" type="button" class="submit-btn">✅ Submit Review</button>
       <div id="review-error" class="error"></div>
     </section>
     <section id="img-content" style="height: 800px;border: 2px;">
@@ -300,6 +295,45 @@
 
   </div>
   </section>
+
+
+  <!-- New user reviews (Old Style)
+  <section style="padding-top: 0;width: 90%;margin: auto;" class="user-review-grid">
+    <div class="review-grid"></div>
+  </section> -->
+
+
+  <!-- New user reviews -->
+  <h2 style="text-align: center;">StreetEats Reviews...</h2>
+  <div class="userReviews" id="userReviews">
+  </div>
+  
+  <!-- <div class="newReviews">
+    <div class="newImg">
+      <img src="images/streetfood2.webp" alt="img">
+    </div>
+    <div class="newDetail">
+      <div class="main">
+        <p id="p1">Stall Name ⭐⭐⭐⭐⭐</p>
+        <p id="p2">View</p>
+      </div>
+      <p>Location : Place Name.</p>
+      <p>Dishes : Dish Name, etc.</p>
+      <p>Review : Review of stall here.</p>
+      <p>Hygiene : Clean/Avg/Poor</p>
+      <div class="giveReview">
+        <div class="satisfyButton">
+          <button id="b1">Worth It👌</button>
+          <button id="b2">👎Not Satisfied</button>
+        </div>
+        <div class="report">
+          <p>Report</p>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+
 
   <!-- Search Section -->
   <section class="search-section" id="search-food">
@@ -421,10 +455,7 @@
     </div>
   </section>
 
-  <!-- New user reviews -->
-  <section style="padding-top: 0;width: 90%;margin: auto;" class="user-review-grid">
-    <div class="review-grid"></div>
-  </section>
+
 
   <!-- Map Section -->
   <!-- <section class="map-section">
@@ -434,12 +465,10 @@
   <h2 style="text-align: center;color: #575757;">Your Near Food Stall</h2>
 
   <div class="map-container">
-  <iframe
-    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3702.199595657844!2d83.1661!3d19.9075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a229c9a0d5d2c8f%3A0x8e0f7f1fcecb5b9c!2sBhawanipatna%2C%20Odisha!5e0!3m2!1sen!2sin!4v1697897432"
-    allowfullscreen=""
-    loading="lazy"
-  ></iframe>
-</div>
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3702.199595657844!2d83.1661!3d19.9075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a229c9a0d5d2c8f%3A0x8e0f7f1fcecb5b9c!2sBhawanipatna%2C%20Odisha!5e0!3m2!1sen!2sin!4v1697897432"
+      allowfullscreen="" loading="lazy"></iframe>
+  </div>
 
 
   <!-- Why Choose Us -->

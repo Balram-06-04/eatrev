@@ -110,93 +110,77 @@ function toggleVendors() {
   }
 }
 
+// New Reviews Storing Dynamically:
 
-// Adding reviews
-// Select form elements
-const stallName = document.querySelector("#stall-name");
-const stallLocation = document.querySelector("#stall-location");
-const stallReview = document.querySelector("#review-text");
-const expectedPrice = document.querySelector("#expected-price");
-const actualPrice = document.querySelector("#actual-price");
-const reviewRating = document.querySelector("#review-rating");
-const reviewPhoto = document.querySelector("#review-photo");
-const photoFile = document.querySelector("#photo-file");
-const reviewSubmit = document.querySelector("#review-submit");
-const vendorContact = document.querySelector("#vendor-contact");
-const hygieneRating = document.querySelector("#hygiene-rating");
-
-// Review grid container
-const reviewGrid = document.querySelector(".user-review-grid");
-
-// Function to create a review card
-const fillCardContent = (imgSrc = "", name = "", rating = 0, review = "") => {
-  const card = document.createElement("div");
-  card.classList.add("vendor-card");
-
-  card.innerHTML = `
-    <div class="vendor-photo">
-      ${imgSrc ? `<img src="${imgSrc}" alt="${name}" />` : ""}
-    </div>
-    <div class="vendor-name">${name} ${"⭐".repeat(rating)}</div>
-    <p><strong>Review:</strong> ${review}</p>
-    <div class="vendor-actions">
-      <button>👍 Worth it</button>
-      <button>👎 Not Satisfy</button>
-    </div>
-  `;
-
-  reviewGrid.appendChild(card);
-};
-
-// Submit handler
-reviewSubmit.addEventListener("click", (e) => {
+document.getElementById('review-form').addEventListener('submit', async function (e) {
   e.preventDefault();
+  previewContainer.innerHTML="";
+  const formData = {
+    stallName: document.getElementById("stall-name").value,
+    stallLocation: document.getElementById("stall-location").value,
+    dishName: document.getElementById("dish-name").value,
+    reviewText: document.getElementById("review-text").value,
+    hygieneCondition: document.getElementById("hygiene-rating").value,  // ✅ fixed
+    overallRating: parseInt(document.getElementById("review-rating").value),  // ✅ fixed
+    worthIt: document.querySelector('input[name="worth-it"]:checked').value,  // ✅ fixed
+    photo: document.getElementById("review-photo").value   // placeholder, later we’ll handle file upload
+  };
 
-  // Get input values
-  const name = stallName.value;
-  const location = stallLocation.value;
-  const review = stallReview.value;
-  const rating = reviewRating.value;
-  const hygiene = hygieneRating.value;
-  const contact = vendorContact.value;
-  const fileInput = reviewPhoto.files[0] || photoFile.files[0];
+  console.log("📩 Sending:", formData); 
+   // debug log
 
-  // Validate
-  if (!name || !location || !review || !rating || !hygiene) {
-    alert("Please fill all required fields.");
-    return;
-  }
+  await fetch('/submit', {
+    method: 'POST',
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(formData)
+  });
 
-  // Handle image
-  if (fileInput) {
-    const reader = new FileReader();
-    reader.onload = function (event) {
-      const imgSrc = event.target.result;
-      fillCardContent(imgSrc, name, rating, review);
-    };
-    reader.readAsDataURL(fileInput);
-  } else {
-    fillCardContent("", name, rating, review);
-  }
-
-  // Reset form
-  // After review is added
-  stallName.value = "";
-  stallLocation.value = "";
-  stallReview.value = "";
-  vendorContact.value = "";
-  reviewRating.selectedIndex = 0;
-  hygieneRating.selectedIndex = 0;
-
-  const worthItRadios = document.querySelectorAll('input[name="worth-it"]');
-  worthItRadios.forEach(radio => radio.checked = radio.value === "yes");
-
-  reviewPhoto.value = "";
-  photoFile.value = "";
-
-  previewContainer.innerHTML = "";
-
+  this.reset();
+  loadUsers();
 });
+
+
+
+async function loadUsers() {
+  const res = await fetch("/getAllReviews");
+  const reviews = await res.json();
+
+  const allReviews = document.getElementById("userReviews");
+  // allUser.innerHTML = "<h2>Hello Dosto</h2>";
+  allReviews.innerHTML = ""; // Clear previous content
+
+  reviews.forEach(rev => {
+    allReviews.innerHTML += ` 
+    <div class="newReviews">
+      <div class="newImg">
+        <img src="${rev.photo}" alt="img" loading="lazy">
+      </div>
+      <div class="newDetail">
+        <div class="main">
+          <p id="p1">${rev.stallName} ${"⭐".repeat(rev.overallRating)}</p>
+          <p id="p2">View</p>
+        </div>
+        <p>Location : ${rev.stallLocation}</p>
+        <p>Dishes : ${rev.dishName}</p>
+        <p>Review : ${rev.reviewText}</p>
+        <p>Hygiene : ${rev.hygieneCondition}</p>
+        <div class="giveReview">
+          <div class="satisfyButton">
+            <button id="b1">Worth It👌</button>
+            <button id="b2">👎Not Satisfied</button>
+          </div>
+          <div class="report">
+            <p>Report</p>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  });
+}
+
+loadUsers();
+
+
 
 // Login_form
 const signIn = document.querySelector("#sign-in");

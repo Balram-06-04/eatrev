@@ -504,7 +504,7 @@ app-content button:hover {
 }
 
 .gradient-text {
-  background: linear-gradient(to right, rgb(253, 253, 253), rgb(233, 163, 13));
+  background: linear-gradient(to right, rgb(253, 253, 253), rgb(255, 255, 255));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -831,21 +831,6 @@ app-content button:hover {
   color: #555;
 }
 
-.back-btn {
-  margin-bottom: 1rem;
-  padding: 8px 16px;
-  background-color: #ddd;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 0.95rem;
-}
-
-.back-btn:hover {
-  background-color: #ccc;
-}
-
-
 /* Vendor Cards */
 .vendor-grid {
   display: grid;
@@ -878,15 +863,12 @@ app-content button:hover {
 }
 
 .vendor-card {
-  scroll-snap-align: start;
-  /* optional: for smooth snap */
-}
-
-.vendor-card {
   background: white;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
   padding: 0.5rem;
+  scroll-snap-align: start;
+  /* optional: for smooth snap */
 }
 
 .vendor-card p {
@@ -918,6 +900,161 @@ app-content button:hover {
   display: flex;
   justify-content: space-between;
   margin-top: 0.5rem;
+}
+
+/* New User Reviews : */
+.userReviews {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  height: 100%;
+  width: 100%;
+  /* border: 2px solid red; */
+  padding: 1rem;
+  max-width: 100%;
+  gap: 8px;
+
+}
+
+.newReviews {
+  height: 100%;
+  width: 360px;
+  border: 1px solid rgb(193, 199, 184);
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+}
+
+.newReviews img {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+  display: block;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.newDetail {
+  display: flex;
+  flex-direction: column;
+  padding: 5px 0px;
+  gap: 5px;
+}
+
+.giveReview {
+  display: flex;
+  justify-content: space-between;
+}
+
+.newDetail p {
+  /* margin: 1px 10px; */
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.newDetail {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  padding-left: 10px;
+}
+
+.newReviews .newDetail .main #p2:active {
+  transform: scale(1.2);
+  background-color: #2caf48;
+  color: white;
+}
+
+.newReviews .newDetail .giveReview .satisfyButton #b1:active {
+  transform: scale(1.1);
+  background-color: #2caf48;
+  color: white;
+}
+
+.newReviews .newDetail .giveReview .satisfyButton #b2:active {
+  transform: scale(1.1);
+  background-color: #ec1b1b;
+  color: white;
+}
+
+.newReviews .newDetail .giveReview .report:active {
+  transform: scale(1.2);
+  background-color: #ec1b1b;
+  color: white;
+}
+
+.satisfyButton {
+  display: flex;
+  gap: 10px;
+  margin-left: 10px;
+  /* border: 2px solid; */
+}
+
+.satisfyButton #b1 {
+  color: green;
+  font-size: 10px;
+  font-weight: bold;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  padding: 2px;
+  border: 1px solid green;
+  border-radius: 5px;
+  cursor: pointer;
+
+}
+
+.satisfyButton #b2 {
+  color: rgb(182, 58, 58);
+  font-size: 10px;
+
+  font-weight: bold;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  padding: 2px;
+  border: 1px solid rgb(187, 32, 32);
+  border-radius: 5px;
+  cursor: pointer;
+
+}
+
+.report {
+  display: flex;
+  border: 1px solid rgb(219, 55, 55);
+  border-radius: 5px;
+  margin-right: 5px;
+  cursor: pointer;
+  background-color: #ff2424;
+  color: white;
+}
+
+.report p {
+  font-size: 14px;
+  color: white;
+}
+
+.main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.main #p1 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.main #p2 {
+  font-size: 14px;
+  font-weight: bold;
+  background-color: #ff9203;
+  color: #fff9f9;
+  border: 1px solid;
+  border-radius: 5px;
+  padding: 1px 10px;
+  cursor: pointer;
 }
 
 /* Map Section */
@@ -1051,27 +1188,4 @@ app-content button:hover {
   /* optional rounded corners */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   /* optional shadow */
-}
-
-
-/* back Button */
-.back-btn {
-  position: fixed;
-  top: 70px;
-  /* adjust so it doesn’t overlap navbar */
-  left: 15px;
-  background: #ff9100;
-  color: white;
-  border: none;
-  padding: 8px 15px;
-  border-radius: 6px;
-  font-size: 1rem;
-  cursor: pointer;
-  z-index: 1000;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-  transition: background 0.3s;
-}
-
-.back-btn:hover {
-  background: #e67e22;
 }
