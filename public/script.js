@@ -111,33 +111,24 @@ function toggleVendors() {
 }
 
 // New Reviews Storing Dynamically:
-
+// New Reviews Storing Dynamically:
 document.getElementById('review-form').addEventListener('submit', async function (e) {
   e.preventDefault();
-  previewContainer.innerHTML="";
-  const formData = {
-    stallName: document.getElementById("stall-name").value,
-    stallLocation: document.getElementById("stall-location").value,
-    dishName: document.getElementById("dish-name").value,
-    reviewText: document.getElementById("review-text").value,
-    hygieneCondition: document.getElementById("hygiene-rating").value,  // ✅ fixed
-    overallRating: parseInt(document.getElementById("review-rating").value),  // ✅ fixed
-    worthIt: document.querySelector('input[name="worth-it"]:checked').value,  // ✅ fixed
-    photo: document.getElementById("review-photo").value   // placeholder, later we’ll handle file upload
-  };
+  previewContainer.innerHTML = "";
 
-  console.log("📩 Sending:", formData); 
-   // debug log
+  const formData = new FormData(this);  // ⬅️ collects all inputs, including file input
+
+  console.log("📩 Sending:", [...formData]); // debug log
 
   await fetch('/submit', {
     method: 'POST',
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(formData)
+    body: formData   // ⬅️ no headers, browser sets them automatically
   });
 
   this.reset();
   loadUsers();
 });
+
 
 
 

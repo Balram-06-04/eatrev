@@ -40,30 +40,38 @@ app.get("/getAllReviews", async (req, res) => {
 });
 
 app.post("/submit", upload.single("image"), async (req, res) => {
-    const { stallName, stallLocation, dishName, reviewText, hygieneCondition, overallRating, worthIt} = req.body;
+  const { stallName, stallLocation, dishName, reviewText, hygieneCondition, overallRating, worthIt } = req.body;
 
-    try {
-        // Upload image to Cloudinary
-        const result = await cloudinary.uploader.upload(req.file.path, {
-            folder: "users", // optional Cloudinary folder
-        });
+  try {
+    // Upload image to Cloudinary
+    const result = await cloudinary.uploader.upload(req.file.path, {
+      folder: "users", // optional folder name in Cloudinary
+    });
 
-        // Delete temp file
-        fs.unlinkSync(req.file.path);
+    // Delete temp file
+    fs.unlinkSync(req.file.path);
 
-        // Save user with Cloudinary URL
-        const newReview = new Review({
-            stallName, stallLocation, dishName, reviewText, hygieneCondition, overallRating, worthIt, photo:result.secure_url,
-        });
+    // Save review
+    const newReview = new Review({
+      stallName,
+      stallLocation,
+      dishName,
+      reviewText,
+      hygieneCondition,
+      overallRating,
+      worthIt,
+      photo: result.secure_url, // save Cloudinary URL
+    });
 
-        await newReview.save();
-        res.status(201).json(newReview);
+    await newReview.save();
+    res.status(201).json(newReview);
 
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ message: "Error saving data" });
-    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Error saving data" });
+  }
 });
+
 
 app.listen(PORT, () => {
     console.log(`🚀 Server running on port ${PORT}`);
