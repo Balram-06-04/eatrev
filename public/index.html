@@ -217,22 +217,24 @@
         style="color: #f1c13b; font-weight: 600; font-family: 'Times New Roman', Times, serif;">
 
         <label for="stall-name">Stall Name</label>
-        <input type="text" id="stall-name" placeholder="e.g. Momo Ghar" required style="color: #000; font-weight: 600">
+        <input type="text" id="stall-name" name="stallName" placeholder="e.g. Momo Ghar" required
+          style="color: #000; font-weight: 600">
 
         <label for="stall-location">Famous Place / Landmark</label>
-        <input type="text" id="stall-location" placeholder="e.g. Near Bus Stand" required
+        <input type="text" id="stall-location" name="stallLocation" placeholder="e.g. Near Bus Stand" required
           style="color: #000; font-weight: 600">
+
         <label for="dish-name">Dish Name</label>
-        <input type="text" id="dish-name" placeholder="e.g. Chowmin, Momo.." required
+        <input type="text" id="dish-name" name="dishName" placeholder="e.g. Chowmin, Momo.." required
           style="color: #000; font-weight: 600">
 
         <label for="review-text">Review</label>
-        <textarea id="review-text" maxlength="500" placeholder="Share your experience..." required
+        <textarea id="review-text" name="reviewText" maxlength="500" placeholder="Share your experience..." required
           style="color: #000; font-weight: 600"></textarea>
 
-                  <!-- Hygiene feedback -->
+        <!-- Hygiene feedback -->
         <label>Hygiene Condition</label>
-        <select id="hygiene-rating" aria-label="Select hygiene">
+        <select id="hygiene-rating" name="hygieneCondition" aria-label="Select hygiene">
           <option value="" disabled selected>Select Hygiene</option>
           <option value="clean">✅ Clean</option>
           <option value="average">⚠️ Average</option>
@@ -240,7 +242,7 @@
         </select>
 
         <label for="review-rating" style="margin-top: 8px;">Overall Rating</label>
-        <select id="review-rating" required aria-required="true" aria-label="Select rating">
+        <select id="review-rating" name="overallRating" required aria-required="true" aria-label="Select rating">
           <option value="" disabled selected>Select rating</option>
           <option value="5">5 - Excellent</option>
           <option value="4">4 - Very Good</option>
@@ -253,28 +255,28 @@
         <label>Was it worth the money?</label>
         <div id="worthIt" style="margin-bottom:10px;">
           <label>
-            <input type="radio" name="worth-it" value="yes" checked> Yes
+            <input type="radio" name="worthIt" value="yes" checked> Yes
           </label>
           <label style="margin-left:15px;">
-            <input type="radio" name="worth-it" value="no"> No
+            <input type="radio" name="worthIt" value="no"> No
           </label>
         </div>
-
-
 
         <!-- Upload -->
         <section id="upload-photo" style="border-radius:10px ;">
           <label for="review-photo">Upload photo</label>
           <button type="button" id="camera-button" class="photo-btn">📸 Open Camera</button>
-          <input type="file" id="review-photo" name="image" accept="image/*" capture="environment" style="display: none;">
+          <input type="file" id="review-photo" name="photo" accept="image/*" capture="environment"
+            style="display: none;">
 
           <button type="button" id="choose-button" class="photo-btn">📁 Choose File</button>
-          <input type="file" id="photo-file" name="image" accept="image/*" style="display: none;">
+          <input type="file" id="photo-file" name="photo" accept="image/*" style="display: none;">
           <div id="photo-preview-container"></div>
         </section>
 
         <button id="review-submit" type="submit" class="submit-btn">✅ Submit Review</button>
       </form>
+
 
       <div id="review-error" class="error"></div>
     </section>
@@ -307,7 +309,7 @@
   <h2 style="text-align: center;">StreetEats Reviews...</h2>
   <div class="userReviews" id="userReviews">
   </div>
-  
+
   <!-- <div class="newReviews">
     <div class="newImg">
       <img src="images/streetfood2.webp" alt="img">
