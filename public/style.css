@@ -666,7 +666,7 @@ app-content button:hover {
 
 #photo-preview-container img {
   width: 100%;
-  max-height: 350px;
+  max-height: 250px;
   /* or any height you want */
   object-fit: cover;
   border-radius: 8px;
