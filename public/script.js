@@ -253,7 +253,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 // New Vendors Data Storing Dynamically:
-document.getElementById('venderForm').addEventListener('submit', async function (e) {
+document.getElementById('vendorForm').addEventListener('submit', async function (e) {
   e.preventDefault();
 
   const formData = new FormData(this);  // ⬅️ collects all inputs, including file input
