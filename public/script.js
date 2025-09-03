@@ -172,19 +172,7 @@ async function loadUsers() {
 loadUsers();
 
 
-// New Vendors Data Storing Dynamically:
-document.getElementById('venderForm').addEventListener('submit', async function (e) {
-  e.preventDefault();
 
-  const formData = new FormData(this);  // ⬅️ collects all inputs, including file input
-
-  await fetch('/vendorData', {
-    method: 'POST',
-    body: formData   // ⬅️ no headers, browser sets them automatically
-  });
-
-  this.reset();
-});
 
 
 // Login_form
@@ -232,36 +220,52 @@ document.addEventListener("DOMContentLoaded", function () {
     showPage();
   });
 
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
+  // form.addEventListener("submit", function (e) {
+  //   e.preventDefault();
 
-    const vendorData = {
-      stallName: document.getElementById("stallName").value,
-      ownerName: document.getElementById("ownerName").value,
-      phone: document.getElementById("phone").value,
-      email: document.getElementById("email").value,
-      location: document.getElementById("location").value,
-      city: document.getElementById("city").value,
-      state: document.getElementById("state").value,
-      accountNumber: document.getElementById("accountNumber").value,
-      ifsc: document.getElementById("ifsc").value,
-      description: document.getElementById("description").value
-    };
+  //   const vendorData = {
+  //     stallName: document.getElementById("stallName").value,
+  //     ownerName: document.getElementById("ownerName").value,
+  //     phone: document.getElementById("phone").value,
+  //     email: document.getElementById("email").value,
+  //     location: document.getElementById("location").value,
+  //     city: document.getElementById("city").value,
+  //     state: document.getElementById("state").value,
+  //     accountNumber: document.getElementById("accountNumber").value,
+  //     ifsc: document.getElementById("ifsc").value,
+  //     description: document.getElementById("description").value
+  //   };
 
-    console.log("Vendor Data Submitted:", vendorData);
 
-    // Show success message
-    successMsg.style.display = "block";
+  //   // Show success message
+  //   successMsg.style.display = "block";
 
-    // Optional: hide after 5 seconds
-    setTimeout(() => {
-      successMsg.style.display = "none";
-    }, 5000);
+  //   // Optional: hide after 5 seconds
+  //   setTimeout(() => {
+  //     successMsg.style.display = "none";
+  //   }, 5000);
 
-    // Clear form
-    form.reset();
-  });
+  //   // Clear form
+  //   form.reset();
+  // });
 });
+
+
+
+// New Vendors Data Storing Dynamically:
+document.getElementById('venderForm').addEventListener('submit', async function (e) {
+  e.preventDefault();
+
+  const formData = new FormData(this);  // ⬅️ collects all inputs, including file input
+
+  await fetch('/vendorData', {
+    method: 'POST',
+    body: formData   // ⬅️ no headers, browser sets them automatically
+  });
+
+  this.reset();
+});
+
 
 // Back Button
 const backBtn = document.getElementById("back-btn");
