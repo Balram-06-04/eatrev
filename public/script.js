@@ -172,6 +172,20 @@ async function loadUsers() {
 loadUsers();
 
 
+// New Vendors Data Storing Dynamically:
+document.getElementById('venderForm').addEventListener('submit', async function (e) {
+  e.preventDefault();
+
+  const formData = new FormData(this);  // ⬅️ collects all inputs, including file input
+
+  await fetch('/vendorData', {
+    method: 'POST',
+    body: formData   // ⬅️ no headers, browser sets them automatically
+  });
+
+  this.reset();
+});
+
 
 // Login_form
 const signIn = document.querySelector("#sign-in");

@@ -165,12 +165,9 @@
 
     <div class="container">
       <h2>Vendor Registration</h2>
-      <form id="vendorForm">
+      <form id="vendorForm" action="/vendorData" method="post">
         <label for="stallName">Stall Name</label>
         <input type="text" id="stallName" required>
-
-        <label for="ownerName">Owner Name</label>
-        <input type="text" id="ownerName" required>
 
         <label for="phone">Phone Number</label>
         <input type="tel" id="phone" required pattern="[0-9]{10}" placeholder="10-digit number">

@@ -16,29 +16,32 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // MongoDB connection
 mongoose.connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 })
-.then(() => console.log("✅ MongoDB Connected"))
-.catch(err => console.error("❌ MongoDB connection error:", err));
+  .then(() => console.log("✅ MongoDB Connected"))
+  .catch(err => console.error("❌ MongoDB connection error:", err));
 
 // Multer config (temporary local storage, just for upload)
 const upload = multer({ dest: "uploads/" });
 
 // Routes
 app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "public"));
+  res.sendFile(path.join(__dirname, "public"));
 });
 
+// Sending all reviews to frontend
 app.get("/getAllReviews", async (req, res) => {
-    try {
-        const reviews = await Review.find().sort({ createdAt: -1 });
-        res.json(reviews);
-    } catch (err) {
-        res.status(500).json({ message: "Error fetching reviews" });
-    }
+  try {
+    const reviews = await Review.find().sort({ createdAt: -1 });
+    res.json(reviews);
+  } catch (err) {
+    res.status(500).json({ message: "Error fetching reviews" });
+  }
 });
 
+
+// Saving street food reviews
 app.post("/submit", upload.single("image"), async (req, res) => {
   const { stallName, stallLocation, dishName, reviewText, hygieneCondition, overallRating, worthIt } = req.body;
 
@@ -72,7 +75,25 @@ app.post("/submit", upload.single("image"), async (req, res) => {
   }
 });
 
+// Saving vendor data
+app.post("/vendorData", async (req, res) => {
+  const { stallName, phone, email, location, state, accountNumber, ifsc, description } = req.body;
+
+  try {
+    const newVendor = new Vendor({
+      stallName, phone, email, location, state, accountNumber, ifsc, description
+    });
+
+    await newVendor.save();
+    res.status(201).json(newVendor);
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Error saving data" });
+  }
+});
+
 
 app.listen(PORT, () => {
-    console.log(`🚀 Server running on port ${PORT}`);
+  console.log(`🚀 Server running on port ${PORT}`);
 });
