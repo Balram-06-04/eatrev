@@ -110,23 +110,46 @@ function toggleVendors() {
   }
 }
 
+
+// Toast () for popup successful msg
+function showToast(message, type = "success") {
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+
+  toast.className = "toast " + type;
+  toast.classList.add("show");
+
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, 3000);
+}
+
+
 // New Reviews Storing Dynamically:
 // New Reviews Storing Dynamically:
 document.getElementById('review-form').addEventListener('submit', async function (e) {
   e.preventDefault();
   previewContainer.innerHTML = "";
 
-  const formData = new FormData(this);  // ⬅️ collects all inputs, including file input
+  const formData = new FormData(this);  // collects all inputs (including file input)
 
-  console.log("📩 Sending:", [...formData]); // debug log
+  try {
+    const res = await fetch('/submit', {
+      method: 'POST',
+      body: formData   // no headers, browser sets them automatically
+    });
 
-  await fetch('/submit', {
-    method: 'POST',
-    body: formData   // ⬅️ no headers, browser sets them automatically
-  });
-
-  this.reset();
-  loadUsers();
+    if (res.ok) {
+      showToast("✅ Review submitted successfully!", "success");
+      this.reset();
+      loadUsers();
+    } else {
+      showToast("❌ Error submitting review", "error");
+    }
+  } catch (err) {
+    console.error("⚠️ Error:", err);
+    showToast("⚠️ Something went wrong!", "error");
+  }
 });
 
 
@@ -267,11 +290,13 @@ document.getElementById('vendorForm').addEventListener('submit', async function 
   });
 
   if (res.ok) {
-    document.getElementById('successMsg').style.display = 'block';
+    showToast("✅ Vendor registered successfully!", "success");
     this.reset();
   } else {
-    alert("Error saving vendor data");
+    showToast("❌ Error saving vendor data", "error");
   }
+
+
 });
 
 
@@ -304,7 +329,21 @@ document.getElementById("vendor-register").addEventListener("click", () => {
   backBtn.style.display = "inline-block";
 });
 
-// Back button logic
+function showToast(message, type = "success") {
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+
+  // Reset classes
+  toast.className = "toast " + type;
+
+  // Show toast
+  toast.classList.add("show");
+
+  // Hide after 3 seconds
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, 3000);
+}
 
 
 // Initialize map (default center = Bhawanipatna)
