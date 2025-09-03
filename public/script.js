@@ -253,44 +253,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 // New Vendors Data Storing Dynamically:
-document.getElementById('vendorForm').addEventListener('submit', async function (e) {
+document.getElementById('venderForm').addEventListener('submit', async function (e) {
   e.preventDefault();
 
-  // Collect form data into a simple JavaScript object
-  const formData = {
-    stallName: document.getElementById('stallName').value,
-    phone: document.getElementById('phone').value,
-    email: document.getElementById('email').value,
-    location: document.getElementById('location').value,
-    state: document.getElementById('state').value,
-    city: document.getElementById('city').value,
-    accountNumber: document.getElementById('accountNumber').value,
-    ifsc: document.getElementById('ifsc').value,
-    description: document.getElementById('description').value,
-  };
+  const formData = new FormData(this);  // ⬅️ collects all inputs, including file input
 
-  // Send the data as JSON
-  try {
-    const response = await fetch('/vendorData', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(formData)
-    });
+  await fetch('/vendorData', {
+    method: 'POST',
+    body: formData   // ⬅️ no headers, browser sets them automatically
+  });
 
-    if (response.ok) {
-      document.getElementById('successMsg').style.display = 'block';
-      this.reset();
-    } else {
-      console.error('Error:', await response.json());
-      alert('An error occurred during registration. Please try again.');
-    }
-  } catch (error) {
-    console.error('Fetch error:', error);
-    alert('A network error occurred. Please check your connection.');
-  }
+  this.reset();
 });
+
 
 // Back Button
 const backBtn = document.getElementById("back-btn");
