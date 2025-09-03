@@ -5,6 +5,7 @@ const PORT = process.env.PORT || 3000;
 // const PORT = 3000;
 const path = require("path");
 const Review = require("./reviewModel");
+const Vendor = require("./vendorRegistrationModel");
 const mongoose = require("mongoose");
 const multer = require("multer");
 const cloudinary = require("./cloudinary");
