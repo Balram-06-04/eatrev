@@ -140,8 +140,8 @@ document.getElementById('review-form').addEventListener('submit', async function
     });
 
     if (res.ok) {
-      showToast("✅ Review submitted successfully!", "success");
       this.reset();
+      showToast("✅ Review submitted successfully!", "success");
       loadUsers();
     } else {
       showToast("❌ Error submitting review", "error");
