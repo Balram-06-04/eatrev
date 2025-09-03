@@ -256,14 +256,22 @@ document.addEventListener("DOMContentLoaded", function () {
 document.getElementById('vendorForm').addEventListener('submit', async function (e) {
   e.preventDefault();
 
-  const formData = new FormData(this);  // ⬅️ collects all inputs, including file input
+  // Convert form inputs into plain object
+  const formData = Object.fromEntries(new FormData(this).entries());
 
-  await fetch('/vendorData', {
+  // Send JSON to backend
+  const res = await fetch('/vendorData', {
     method: 'POST',
-    body: formData   // ⬅️ no headers, browser sets them automatically
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(formData)
   });
 
-  this.reset();
+  if (res.ok) {
+    document.getElementById('successMsg').style.display = 'block';
+    this.reset();
+  } else {
+    alert("Error saving vendor data");
+  }
 });
 
 

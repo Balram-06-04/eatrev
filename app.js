@@ -78,11 +78,11 @@ app.post("/submit", upload.single("image"), async (req, res) => {
 
 // Saving vendor data
 app.post("/vendorData", async (req, res) => {
-  const { stallName, phone, email, location, state, accountNumber, ifsc, description } = req.body;
+  const { stallName, phone, email, location, state, city, accountNumber, ifsc, description } = req.body;
 
   try {
     const newVendor = new Vendor({
-      stallName, phone, email, location, state, accountNumber, ifsc, description
+      stallName, phone, email, location, state, city, accountNumber, ifsc, description
     });
 
     await newVendor.save();
@@ -93,6 +93,7 @@ app.post("/vendorData", async (req, res) => {
     res.status(500).json({ message: "Error saving data" });
   }
 });
+
 
 
 app.listen(PORT, () => {
