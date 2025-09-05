@@ -155,8 +155,8 @@ document.getElementById('review-form').addEventListener('submit', async function
 
       // ✅ Scroll to the last added review
       const reviewsContainer = document.getElementById("userReviews");
-      if (reviewsContainer && reviewsContainer.lastElementChild) {
-        const newReview = reviewsContainer.lastElementChild;
+      if (reviewsContainer && reviewsContainer.firstElementChild) {
+        const newReview = reviewsContainer.firstElementChild;
 
         // Add highlight effect
         newReview.classList.add("highlight-review");
