@@ -128,44 +128,60 @@ function showToast(message, type = "success") {
 // New Reviews Storing Dynamically:
 // New Reviews Storing Dynamically:
 const loader = document.getElementById("loader");
-
 document.getElementById('review-form').addEventListener('submit', async function (e) {
   e.preventDefault();
-  const submitBtn = document.getElementById("review-submit");
-  const overlay = document.getElementById("loader-overlay");
+  previewContainer.innerHTML = "";
 
-  const formData = new FormData(this);
+  const loader = document.getElementById("loader-overlay");
+  loader.style.display = "flex"; // show loader
 
-  // Show spinner inside button
-  submitBtn.classList.add("loading");
-
-  // Show overlay if it takes longer than 2s
-  const overlayTimeout = setTimeout(() => {
-    overlay.style.display = "flex";
-  }, 2000);
+  const formData = new FormData(this); // collects all inputs (including file input)
 
   try {
     const res = await fetch('/submit', {
       method: 'POST',
-      body: formData
+      body: formData // no headers needed for FormData
     });
+
+    loader.style.display = "none"; // hide loader
 
     if (res.ok) {
       this.reset();
+      previewContainer.innerHTML = "";
+
       showToast("✅ Review submitted successfully!", "success");
-      loadUsers();
+
+      await loadUsers(); // reload all reviews
+
+      // ✅ Scroll to the last added review
+      const reviewsContainer = document.getElementById("userReviews");
+      if (reviewsContainer && reviewsContainer.lastElementChild) {
+        const newReview = reviewsContainer.lastElementChild;
+
+        // Add highlight effect
+        newReview.classList.add("highlight-review");
+
+        // Smooth scroll
+        newReview.scrollIntoView({
+          behavior: "smooth",
+          block: "center"
+        });
+
+        // Remove highlight after 2s
+        setTimeout(() => {
+          newReview.classList.remove("highlight-review");
+        }, 2000);
+      }
     } else {
       showToast("❌ Error submitting review", "error");
     }
   } catch (err) {
+    loader.style.display = "none"; // hide loader if error
     console.error("⚠️ Error:", err);
     showToast("⚠️ Something went wrong!", "error");
-  } finally {
-    clearTimeout(overlayTimeout);
-    overlay.style.display = "none";
-    submitBtn.classList.remove("loading");
   }
 });
+
 
 
 

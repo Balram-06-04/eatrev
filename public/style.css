@@ -1272,3 +1272,8 @@ app-content button:hover {
   border-radius: 50%;
   animation: spin 0.6s linear infinite;
 }
+
+.highlight-review {
+  background-color: #fff3cd; /* soft yellow */
+  transition: background-color 2s ease;
+}
