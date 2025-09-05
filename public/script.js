@@ -309,27 +309,44 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 // New Vendors Data Storing Dynamically:
+// Vendor Registration with Loader
 document.getElementById('vendorForm').addEventListener('submit', async function (e) {
   e.preventDefault();
 
-  // Convert form inputs into plain object
+  const submitBtn = this.querySelector("button[type='submit']");
+  const overlay = document.getElementById("loader-overlay");
+
   const formData = Object.fromEntries(new FormData(this).entries());
 
-  // Send JSON to backend
-  const res = await fetch('/vendorData', {
-    method: 'POST',
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(formData)
-  });
+  // Spinner in button
+  submitBtn.classList.add("loading");
 
-  if (res.ok) {
-    showToast("✅ Vendor registered successfully!", "success");
-    this.reset();
-  } else {
-    showToast("❌ Error saving vendor data", "error");
+  // Show overlay if request takes >2s
+  const overlayTimeout = setTimeout(() => {
+    overlay.style.display = "flex";
+  }, 2000);
+
+  try {
+    const res = await fetch('/vendorData', {
+      method: 'POST',
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData)
+    });
+
+    if (res.ok) {
+      showToast("✅ Vendor registered successfully!", "success");
+      this.reset();
+    } else {
+      showToast("❌ Error saving vendor data", "error");
+    }
+  } catch (err) {
+    console.error("⚠️ Error:", err);
+    showToast("⚠️ Something went wrong!", "error");
+  } finally {
+    clearTimeout(overlayTimeout);
+    overlay.style.display = "none";
+    submitBtn.classList.remove("loading");
   }
-
-
 });
 
 
