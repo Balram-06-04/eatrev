@@ -77,12 +77,19 @@ app.post("/submit", upload.single("image"), async (req, res) => {
 });
 
 // Saving vendor data
-app.post("/vendorData", async (req, res) => {
+app.post("/vendorData",upload.single("image"), async (req, res) => {
   const { stallName, phone, email, location, state, city, accountNumber, ifsc, description } = req.body;
 
   try {
+    // Upload image to Cloudinary
+    const picture = await cloudinary.uploader.upload(req.file.path, {
+      folder: "VendorRegistrationPhoto", // optional folder name in Cloudinary
+    });
+
+    // Delete temp file
+    fs.unlinkSync(req.file.path);
     const newVendor = new Vendor({
-      stallName, phone, email, location, state, city, accountNumber, ifsc, description
+      stallName, phone, email, location, state, city, accountNumber, ifsc, description,photo: picture.secure_url, // save Cloudinary URL
     });
 
     await newVendor.save();

@@ -240,31 +240,6 @@ loadUsers();
 
 
 
-// Login_form
-const signIn = document.querySelector("#sign-in");
-const vendorRegister = document.querySelector("#vendor-register");
-const loginForm = document.querySelector(".login-container");
-signIn.addEventListener("click", () => {
-  loginForm.style.display = "block";
-  mainSection.style.display = "none";
-  uploadBtn.style.display = "none";
-})
-
-// Toggle password visibility
-const toggle = document.getElementById("togglePassword");
-const passwordInput = document.getElementById("password");
-
-toggle.addEventListener("click", () => {
-  const currentType = passwordInput.getAttribute("type");
-
-  if (currentType === "password") {
-    passwordInput.setAttribute("type", "text");      // Show password
-    toggle.textContent = "🙈";                        // Change icon
-  } else {
-    passwordInput.setAttribute("type", "password");  // Hide password
-    toggle.textContent = "👁️";                        // Change icon back
-  }
-});
 
 // Vendor-Registration
 document.addEventListener("DOMContentLoaded", function () {
@@ -277,7 +252,6 @@ document.addEventListener("DOMContentLoaded", function () {
     mainSection.style.display = "none";
     document.querySelector(".search-section").style.display = "none";
     document.querySelector(".popular-tags").style.display = "none";
-
 
   }
 
@@ -333,7 +307,7 @@ document.getElementById('vendorForm').addEventListener('submit', async function 
   // Show overlay if request takes >2s
   const overlayTimeout = setTimeout(() => {
     overlay.style.display = "flex";
-  }, 2000);
+  }, 1500);
 
   try {
     const res = await fetch('/vendorData', {
@@ -345,6 +319,7 @@ document.getElementById('vendorForm').addEventListener('submit', async function 
     if (res.ok) {
       showToast("✅ Vendor registered successfully!", "success");
       this.reset();
+      // await loadVendors();
     } else {
       showToast("❌ Error saving vendor data", "error");
     }
@@ -355,6 +330,77 @@ document.getElementById('vendorForm').addEventListener('submit', async function 
     clearTimeout(overlayTimeout);
     overlay.style.display = "none";
     submitBtn.classList.remove("loading");
+  }
+});
+
+// async function loadVendors() {
+//   const res = await fetch("/getAllReviews");
+//   const reviews = await res.json();
+
+//   const allReviews = document.getElementById("userReviews");
+//   // allUser.innerHTML = "<h2>Hello Dosto</h2>";
+//   allReviews.innerHTML = ""; // Clear previous content
+
+//   reviews.forEach(rev => {
+//     allReviews.innerHTML += ` 
+//     <div class="newReviews">
+//       <div class="newImg">
+//         <img src="${rev.photo}" alt="img" loading="lazy">
+//       </div>
+//       <div class="newDetail">
+//         <div class="main">
+//           <p id="p1">${rev.stallName} ${"⭐".repeat(rev.overallRating)}</p>
+//           <p id="p2">View</p>
+//         </div>
+//         <p>Location : ${rev.stallLocation}</p>
+//         <p>Dishes : ${rev.dishName}</p>
+//         <p>Review : ${rev.reviewText}</p>
+//         <p>Hygiene : ${rev.hygieneCondition}</p>
+//         <div class="giveReview">
+//           <div class="satisfyButton">
+//             <button id="b1">Worth It👌</button>
+//             <button id="b2">👎Not Satisfied</button>
+//           </div>
+//           <div class="report">
+//             <p>Report</p>
+//           </div>
+//         </div>
+//       </div>
+//     </div>`;
+//   });
+// }
+
+// loadVendors();
+
+
+
+
+// Login_form
+
+
+
+const signIn = document.querySelector("#sign-in");
+const vendorRegister = document.querySelector("#vendor-register");
+const loginForm = document.querySelector(".login-container");
+signIn.addEventListener("click", () => {
+  loginForm.style.display = "block";
+  mainSection.style.display = "none";
+  uploadBtn.style.display = "none";
+})
+
+// Toggle password visibility
+const toggle = document.getElementById("togglePassword");
+const passwordInput = document.getElementById("password");
+
+toggle.addEventListener("click", () => {
+  const currentType = passwordInput.getAttribute("type");
+
+  if (currentType === "password") {
+    passwordInput.setAttribute("type", "text");      // Show password
+    toggle.textContent = "🙈";                        // Change icon
+  } else {
+    passwordInput.setAttribute("type", "password");  // Hide password
+    toggle.textContent = "👁️";                        // Change icon back
   }
 });
 

@@ -52,6 +52,9 @@ const vendorSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
+    photo: {
+        type: String, // we will store the photo URL or filename here
+    },
     createdAt: {
         type: Date,
         default: Date.now
