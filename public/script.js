@@ -127,16 +127,27 @@ function showToast(message, type = "success") {
 
 // New Reviews Storing Dynamically:
 // New Reviews Storing Dynamically:
+const loader = document.getElementById("loader");
+
 document.getElementById('review-form').addEventListener('submit', async function (e) {
   e.preventDefault();
-  previewContainer.innerHTML = "";
+  const submitBtn = document.getElementById("review-submit");
+  const overlay = document.getElementById("loader-overlay");
 
-  const formData = new FormData(this);  // collects all inputs (including file input)
+  const formData = new FormData(this);
+
+  // Show spinner inside button
+  submitBtn.classList.add("loading");
+
+  // Show overlay if it takes longer than 2s
+  const overlayTimeout = setTimeout(() => {
+    overlay.style.display = "flex";
+  }, 2000);
 
   try {
     const res = await fetch('/submit', {
       method: 'POST',
-      body: formData   // no headers, browser sets them automatically
+      body: formData
     });
 
     if (res.ok) {
@@ -149,8 +160,14 @@ document.getElementById('review-form').addEventListener('submit', async function
   } catch (err) {
     console.error("⚠️ Error:", err);
     showToast("⚠️ Something went wrong!", "error");
+  } finally {
+    clearTimeout(overlayTimeout);
+    overlay.style.display = "none";
+    submitBtn.classList.remove("loading");
   }
 });
+
+
 
 
 
