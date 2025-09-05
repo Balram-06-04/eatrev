@@ -299,29 +299,23 @@ document.getElementById('vendorForm').addEventListener('submit', async function 
   const submitBtn = this.querySelector("button[type='submit']");
   const overlay = document.getElementById("loader-overlay");
 
-  const formData = Object.fromEntries(new FormData(this).entries());
+  const formData = new FormData(this); // ✅ keep as FormData (not JSON)
 
-  // Spinner in button
   submitBtn.classList.add("loading");
-
-  // Show overlay if request takes >2s
-  const overlayTimeout = setTimeout(() => {
-    overlay.style.display = "flex";
-  }, 1500);
+  const overlayTimeout = setTimeout(() => { overlay.style.display = "flex"; }, 1500);
 
   try {
     const res = await fetch('/vendorData', {
       method: 'POST',
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData)
+      body: formData // ✅ don't set Content-Type, fetch will handle it
     });
 
     if (res.ok) {
       showToast("✅ Vendor registered successfully!", "success");
       this.reset();
-      // await loadVendors();
     } else {
-      showToast("❌ Error saving vendor data", "error");
+      const err = await res.json();
+      showToast("❌ " + (err.message || "Error saving vendor data"), "error");
     }
   } catch (err) {
     console.error("⚠️ Error:", err);
@@ -332,6 +326,7 @@ document.getElementById('vendorForm').addEventListener('submit', async function 
     submitBtn.classList.remove("loading");
   }
 });
+
 
 // async function loadVendors() {
 //   const res = await fetch("/getAllReviews");
