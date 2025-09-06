@@ -66,7 +66,7 @@ photoFileInput.addEventListener("change", () => showPreview(photoFileInput));
 // finding vendors
 function showVendors() {
   // Show vendor section
-  document.getElementById("event-vendor-section").style.display = "block";
+  document.getElementById("event-vendor-section").style.display = "flex";
 
   // Hide other sections (optional - change IDs to match your layout)
   const homeSection = document.getElementById("home-section"); // Replace with your homepage section ID
@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   findVendorsBtn.addEventListener("click", function () {
     // Make sure vendor section is visible
-    vendorSection.style.display = "block";
+    vendorSection.style.display = "flex";
 
     // Scroll to vendor section smoothly
     vendorSection.scrollIntoView({ behavior: "smooth" });
@@ -329,7 +329,7 @@ async function loadVendors() {
   const allVendors = document.getElementById("event-vendor-section");
   allVendors.innerHTML = `
   <div class="headVendor">
-     <h2 id="bookVendorHead" style=" display: none;text-align: center;margin-top: 20px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Available Food Vendors for Event Booking</h2>
+     <h2 id="bookVendorHead" style="text-align: center;margin-top: 20px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Available Food Vendors for Event Booking</h2>
    </div>
   `;
 
