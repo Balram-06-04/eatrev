@@ -101,6 +101,15 @@ app.post("/vendorData",upload.single("image"), async (req, res) => {
   }
 });
 
+app.get("/getAllVendors", async (req, res) => {
+  try {
+    const vendors = await Vendor.find().sort({ createdAt: -1 });
+    res.json(vendors);
+  } catch (err) {
+    res.status(500).json({ message: "Error fetching vendors details" });
+  }
+});
+
 
 
 app.listen(PORT, () => {

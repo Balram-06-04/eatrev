@@ -313,6 +313,8 @@ document.getElementById('vendorForm').addEventListener('submit', async function 
     if (res.ok) {
       showToast("✅ Vendor registered successfully!", "success");
       this.reset();
+      loadVendors();
+
     } else {
       const err = await res.json();
       showToast("❌ " + (err.message || "Error saving vendor data"), "error");
@@ -328,44 +330,34 @@ document.getElementById('vendorForm').addEventListener('submit', async function 
 });
 
 
-// async function loadVendors() {
-//   const res = await fetch("/getAllReviews");
-//   const reviews = await res.json();
+async function loadVendors() {
+  const res = await fetch("/getAllVendors");
+  const vendors = await res.json();
 
-//   const allReviews = document.getElementById("userReviews");
-//   // allUser.innerHTML = "<h2>Hello Dosto</h2>";
-//   allReviews.innerHTML = ""; // Clear previous content
+  const allVendors = document.getElementById("event-vendor-section");
+  // allUser.innerHTML = "<h2>Hello Dosto</h2>";
+  allVendors.innerHTML = ""; // Clear previous content
 
-//   reviews.forEach(rev => {
-//     allReviews.innerHTML += ` 
-//     <div class="newReviews">
-//       <div class="newImg">
-//         <img src="${rev.photo}" alt="img" loading="lazy">
-//       </div>
-//       <div class="newDetail">
-//         <div class="main">
-//           <p id="p1">${rev.stallName} ${"⭐".repeat(rev.overallRating)}</p>
-//           <p id="p2">View</p>
-//         </div>
-//         <p>Location : ${rev.stallLocation}</p>
-//         <p>Dishes : ${rev.dishName}</p>
-//         <p>Review : ${rev.reviewText}</p>
-//         <p>Hygiene : ${rev.hygieneCondition}</p>
-//         <div class="giveReview">
-//           <div class="satisfyButton">
-//             <button id="b1">Worth It👌</button>
-//             <button id="b2">👎Not Satisfied</button>
-//           </div>
-//           <div class="report">
-//             <p>Report</p>
-//           </div>
-//         </div>
-//       </div>
-//     </div>`;
-//   });
-// }
+  vendors.forEach(v => {
+    allVendors.innerHTML += ` 
+      <div class="event-vendor-card">
+        <img src="${v.photo}" alt="vendorStallImage">
 
-// loadVendors();
+        <h3>${v.stallName}</h3>
+
+        <p><strong>Special Dishes:</strong> ${v.description}</p>
+        <p><strong>Location:</strong> ${v.city}, ${v.state}</p>
+        <p><strong>Contact:</strong> ${v.phone}</p>
+        <p><strong>Email:</strong> ${v.email}</p>
+        <p><strong>Price Range:</strong> ₹2000 - ₹5000 per event</p>
+        <p><strong>Rating:</strong> ⭐⭐⭐⭐ (4.5/5)</p>
+
+        <button class="book-btn">Book Now</button>
+      </div>`;
+  });
+}
+
+loadVendors();
 
 
 

@@ -14,14 +14,14 @@ const vendorSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        required: true,
+        required: false,
         trim: true,
         lowercase: true, // Stores the email in lowercase
         match: /^\S+@\S+\.\S+$/ // Basic email format validation
     },
     location: {
         type: String,
-        required: true,
+        required: false,
         trim: true
     },
     state: {
