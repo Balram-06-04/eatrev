@@ -335,8 +335,11 @@ async function loadVendors() {
   const vendors = await res.json();
 
   const allVendors = document.getElementById("event-vendor-section");
-  // allUser.innerHTML = "<h2>Hello Dosto</h2>";
-  allVendors.innerHTML = ""; // Clear previous content
+  allVendors.innerHTML = ` 
+      <h2 style="text-align: center; margin-top: 20px;">
+        Available Food Vendors for Event Booking
+      </h2>
+    `;
 
   vendors.forEach(v => {
     allVendors.innerHTML += ` 
