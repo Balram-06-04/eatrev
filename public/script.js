@@ -396,33 +396,33 @@ toggle.addEventListener("click", () => {
 
 
 // Back Button
-const backBtn = document.getElementById("back-btn");
-const heroButtons = document.querySelector(".hero-buttons");
-const vendorSection = document.getElementById("event-vendor-section");
+// const backBtn = document.getElementById("back-btn");
+// const heroButtons = document.querySelector(".hero-buttons");
+// const vendorSection = document.getElementById("event-vendor-section");
 // const reviewSection = document.getElementById("two-part");
 // const vendorRegister = document.querySelector(".vendor-registration");
 // const mainSection = document.getElementById("main-section");
 
 // Book Vendors button
-document.getElementById("find-vendors-btn").addEventListener("click", () => {
-  mainSection.style.display = "none";
-  vendorSection.style.display = "block";
-  backBtn.style.display = "inline-block";
-});
+// document.getElementById("find-vendors-btn").addEventListener("click", () => {
+//   mainSection.style.display = "none";
+//   vendorSection.style.display = "flex";
+//   backBtn.style.display = "inline-block";
+// });
 
-// Upload Reviews button
-document.getElementById("upload-reviews").addEventListener("click", () => {
-  mainSection.style.display = "none";
-  reviewSection.style.display = "flex";
-  backBtn.style.display = "inline-block";
-});
+// // Upload Reviews button
+// document.getElementById("upload-reviews").addEventListener("click", () => {
+//   mainSection.style.display = "none";
+//   reviewSection.style.display = "flex";
+//   backBtn.style.display = "inline-block";
+// });
 
-// Vendor Register button
-document.getElementById("vendor-register").addEventListener("click", () => {
-  mainSection.style.display = "none";
-  vendorRegister.style.display = "block";
-  backBtn.style.display = "inline-block";
-});
+// // Vendor Register button
+// document.getElementById("vendor-register").addEventListener("click", () => {
+//   mainSection.style.display = "none";
+//   vendorRegister.style.display = "block";
+//   backBtn.style.display = "inline-block";
+// });
 
 function showToast(message, type = "success") {
   const toast = document.getElementById("toast");
