@@ -97,18 +97,10 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // Toggle vendor details:
-function toggleVendors() {
-  const vendorSection = document.getElementById("event-vendor-section");
-  const findBtn = document.getElementById("find-vendors-btn");
-
-  if (vendorSection.style.display === "none" || vendorSection.style.display === "") {
-    vendorSection.style.display = "block";
-    findBtn.textContent = "Hide Vendors";
-  } else {
-    vendorSection.style.display = "none";
-    findBtn.textContent = "Find Vendors";
-  }
-}
+// const findBtn = document.getElementById("find-vendors-btn");
+// findBtn.addEventListener('click', () => {
+//   document.getElementById("bookVendorHead").style.display = "block";
+// })
 
 // scroll to userReviews when click explore reviews button
 document.getElementById("explore-reviews").addEventListener("click", () => {
@@ -335,11 +327,11 @@ async function loadVendors() {
   const vendors = await res.json();
 
   const allVendors = document.getElementById("event-vendor-section");
-  allVendors.innerHTML = ` 
-      <h4 style="text-align: center; margin-top: 10px;">
-        Available Food Vendors for Event Booking
-      </h4>
-    `;
+  allVendors.innerHTML = `
+  <div class="headVendor">
+     <h2 id="bookVendorHead" style=" display: none;text-align: center;margin-top: 20px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Available Food Vendors for Event Booking</h2>
+   </div>
+  `;
 
   vendors.forEach(v => {
     allVendors.innerHTML += ` 
