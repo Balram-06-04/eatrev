@@ -111,6 +111,16 @@ document.getElementById("explore-reviews").addEventListener("click", () => {
 });
 
 
+function showVendorBooking() {
+  document.getElementById('bookVendorHead').style.display = 'block';
+}
+
+function hideVendorBooking() {
+  document.getElementById('bookVendorHead').style.display = 'none';
+  // document.getElementById('event-vendor-section').style.display = 'none';
+}
+
+
 
 // Toast () for popup successful msg
 function showToast(message, type = "success") {
@@ -327,11 +337,7 @@ async function loadVendors() {
   const vendors = await res.json();
 
   const allVendors = document.getElementById("event-vendor-section");
-  allVendors.innerHTML = `
-  <div class="headVendor">
-     <h2 id="bookVendorHead" style="text-align: center;margin-top: 20px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Available Food Vendors for Event Booking</h2>
-   </div>
-  `;
+  allVendors.innerHTML = "";
 
   vendors.forEach(v => {
     allVendors.innerHTML += ` 
