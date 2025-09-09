@@ -42,9 +42,6 @@
       <button id="sign-in">Sign In</button>
       <span id="option" style="font-size: 2.2rem; margin-right: 2px">≡</span>
     </div>
-    <!-- Back Button -->
-    <!-- Back Button -->
-    <button id="back-btn" class="back-btn">⬅ Back</button>
     <!-- Dropdown Menu -->
     <div class="dropdown" id="dropdownMenu">
       <a href="home.html">Home</a>
@@ -53,7 +50,11 @@
     </div>
 
   </nav>
-
+  <!-- Back Button -->
+  <button id="back-btn" class="back-btn" style="display: none ;position: absolute;z-index: 100;">⬅ Back</button>
+  <script>
+    const bckbtn = document.querySelector("#back-btn");
+  </script>
   <!-- Hero Section -->
   <section id="main-section" class="hero">
     <h1 style="color: #ffc400; font-size: 2rem; font-family: Verdana, Geneva, Tahoma, sans-serif; margin: 0px;">Street
@@ -75,6 +76,7 @@
         Reviews</button>
     </div>
   </section>
+
 
   <!-- Login section -->
   <div class="login-container" style="display: none;margin:0 auto;">
@@ -474,6 +476,10 @@
   </section>
   <script src="script.js"></script>
   <div id="toast" class="toast"></div>
+
+  <!-- <script>
+  const bckbtn=document.querySelector("#back-btn");
+</script> -->
 
 </body>
 

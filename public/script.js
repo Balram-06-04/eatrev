@@ -96,6 +96,8 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+
+
 // Toggle vendor details:
 // const findBtn = document.getElementById("find-vendors-btn");
 // findBtn.addEventListener('click', () => {
@@ -103,12 +105,14 @@ document.addEventListener("DOMContentLoaded", function () {
 // })
 
 // scroll to userReviews when click explore reviews button
-document.getElementById("explore-reviews").addEventListener("click", () => {
+exploreReviews = document.getElementById("explore-reviews");
+exploreReviews.addEventListener("click", () => {
   const reviewsSection = document.getElementById("userReviews");
   if (reviewsSection) {
     reviewsSection.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 });
+  
 
 
 function showVendorBooking() {
