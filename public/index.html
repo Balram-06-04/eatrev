@@ -36,7 +36,7 @@
       </div>
     </div>
     <div class="nav-links">
-      <span id="search">🔍</span>
+      <!-- <span id="search">🔍</span> -->
       <span id="notification">🔔</span>
       <span id="account">👤</span>
       <button id="sign-in">Sign In</button>
@@ -51,7 +51,7 @@
 
   </nav>
   <!-- Back Button -->
-  <button id="back-btn" class="back-btn" style="display: none ;position: absolute;z-index: 100;">⬅ Back</button>
+  <button id="back-btn" class="back-btn" style="bottom: 0;position: fixed;z-index: 100;">⬅ Back</button>
   <script>
     const bckbtn = document.querySelector("#back-btn");
   </script>
@@ -480,6 +480,59 @@
   <!-- <script>
   const bckbtn=document.querySelector("#back-btn");
 </script> -->
+  <script>
+    const signInBtn = document.querySelector("#sign-in");
+    const findVendorBtn = document.querySelector("#find-vendors-btn");
+    const vendorRegisterBtn = document.querySelector("#vendor-register");
+    const uploadReviewsBtnBtn = document.querySelector("#upload-reviews");
+
+    const heroSection = document.querySelector(".hero");
+    const loginContainer = document.querySelector(".login-container");
+    const eventVendorSection = document.querySelector("#event-vendor-section");
+    const vendorRegistration = document.querySelector("#check");
+    const uploadReviews = document.querySelector("#two-part");
+    const userReviews = document.querySelector("#userReviews");
+
+    bckbtn.style.display = "none";
+    signInBtn.addEventListener("click", () => {
+      bckbtn.style.display = "block";
+
+    })
+    findVendorBtn.addEventListener("click", () => {
+      bckbtn.style.display = "block";
+
+    })
+    vendorRegisterBtn.addEventListener("click", () => {
+      bckbtn.style.display = "block";
+
+    })
+    uploadReviewsBtnBtn.addEventListener("click", () => {
+      bckbtn.style.display = "block";
+
+    })
+
+    bckbtn.addEventListener("click", () => {
+      // Hide all other sections
+      loginContainer.style.display = "none";
+      eventVendorSection.style.display = "none";
+      vendorRegistration.style.display = "none";
+      uploadReviews.style.display = "none";
+
+      // Show hero section first
+      heroSection.style.display = "flex";
+
+      // Now scroll to hero
+      if (heroSection) {
+        heroSection.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      // Hide back button again
+      bckbtn.style.display = "none";
+    });
+
+
+
+  </script>
 
 </body>
 

@@ -1354,3 +1354,31 @@ app-content button:hover {
 .book-btn:hover {
   background: #e63946;
 }
+
+.back-btn {
+  position: fixed;
+  bottom: 20px;       /* keep above bottom edge */
+  left: 10px;         /* stick to left side */
+  z-index: 100;       /* stay above everything */
+
+  background: #ff9036;  /* red background */
+  color: #fff;          /* white text */
+  border: none;
+  border-radius: 8px;
+  padding: 10px 18px;
+  /* font-size: 16px; */
+  font-weight: 600;
+  cursor: pointer;
+
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+  background: #e84118;   /* darker red on hover */
+  transform: scale(1.05);
+}
+
+.back-btn:active {
+  transform: scale(0.95);
+}

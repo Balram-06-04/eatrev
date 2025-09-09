@@ -112,7 +112,7 @@ exploreReviews.addEventListener("click", () => {
     reviewsSection.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 });
-  
+
 
 
 function showVendorBooking() {
@@ -480,3 +480,56 @@ map.on("locationfound", function (e) {
 map.on("locationerror", function () {
   alert("Unable to get your location. Please enable GPS or allow browser location access.");
 });
+
+
+// Code for back button
+// const signInBtn = document.querySelector("#sign-in");
+// const findVendorBtn = document.querySelector("#find-vendors-btn");
+// const vendorRegisterBtn = document.querySelector("#vendor-register");
+// const uploadReviewsBtnBtn = document.querySelector("#upload-reviews");
+
+// const heroSection = document.querySelector(".hero");
+// const loginContainer = document.querySelector(".login-container");
+// const eventVendorSection = document.querySelector("#event-vendor-section");
+// const vendorRegistration = document.querySelector("#check");
+// const uploadReviews = document.querySelector("#two-part");
+// const userReviews = document.querySelector("#userReviews");
+
+// bckbtn.style.display = "none";
+// signInBtn.addEventListener("click", () => {
+//   bckbtn.style.display = "block";
+
+// })
+// findVendorBtn.addEventListener("click", () => {
+//   bckbtn.style.display = "block";
+
+// })
+// vendorRegisterBtn.addEventListener("click", () => {
+//   bckbtn.style.display = "block";
+
+// })
+// uploadReviewsBtnBtn.addEventListener("click", () => {
+//   bckbtn.style.display = "block";
+
+// })
+
+// bckbtn.addEventListener("click", () => {
+//   // Hide all other sections
+//   loginContainer.style.display = "none";
+//   eventVendorSection.style.display = "none";
+//   vendorRegistration.style.display = "none";
+//   uploadReviews.style.display = "none";
+
+//   // Show hero section first
+//   heroSection.style.display = "flex";
+
+//   // Now scroll to hero
+//   if (heroSection) {
+//     heroSection.scrollIntoView({ behavior: "smooth", block: "start" });
+//   }
+
+//   // Hide back button again
+//   bckbtn.style.display = "none";
+// });
+
+
