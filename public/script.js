@@ -232,7 +232,7 @@ async function loadUsers() {
             <button id="b2">👎Not Satisfied</button>
           </div>
           <div class="report">
-            <p>Report</p>
+            <p id="reportBtn">Report</p>
           </div>
         </div>
       </div>
@@ -368,16 +368,13 @@ loadVendors();
 
 
 // Login_form
-
-
-
 const signIn = document.querySelector("#sign-in");
 const vendorRegister = document.querySelector("#vendor-register");
 const loginForm = document.querySelector(".login-container");
 signIn.addEventListener("click", () => {
   loginForm.style.display = "block";
   mainSection.style.display = "none";
-  uploadBtn.style.display = "none";
+  // uploadBtn.style.display = "none";
 })
 
 // Toggle password visibility
@@ -395,36 +392,6 @@ toggle.addEventListener("click", () => {
     toggle.textContent = "👁️";                        // Change icon back
   }
 });
-
-
-// Back Button
-// const backBtn = document.getElementById("back-btn");
-// const heroButtons = document.querySelector(".hero-buttons");
-// const vendorSection = document.getElementById("event-vendor-section");
-// const reviewSection = document.getElementById("two-part");
-// const vendorRegister = document.querySelector(".vendor-registration");
-// const mainSection = document.getElementById("main-section");
-
-// Book Vendors button
-// document.getElementById("find-vendors-btn").addEventListener("click", () => {
-//   mainSection.style.display = "none";
-//   vendorSection.style.display = "flex";
-//   backBtn.style.display = "inline-block";
-// });
-
-// // Upload Reviews button
-// document.getElementById("upload-reviews").addEventListener("click", () => {
-//   mainSection.style.display = "none";
-//   reviewSection.style.display = "flex";
-//   backBtn.style.display = "inline-block";
-// });
-
-// // Vendor Register button
-// document.getElementById("vendor-register").addEventListener("click", () => {
-//   mainSection.style.display = "none";
-//   vendorRegister.style.display = "block";
-//   backBtn.style.display = "inline-block";
-// });
 
 function showToast(message, type = "success") {
   const toast = document.getElementById("toast");
@@ -480,57 +447,6 @@ map.on("locationfound", function (e) {
 map.on("locationerror", function () {
   alert("Unable to get your location. Please enable GPS or allow browser location access.");
 });
-
-
-// Code for back button
-// const signInBtn = document.querySelector("#sign-in");
-// const findVendorBtn = document.querySelector("#find-vendors-btn");
-// const vendorRegisterBtn = document.querySelector("#vendor-register");
-// const uploadReviewsBtnBtn = document.querySelector("#upload-reviews");
-
-// const heroSection = document.querySelector(".hero");
-// const loginContainer = document.querySelector(".login-container");
-// const eventVendorSection = document.querySelector("#event-vendor-section");
-// const vendorRegistration = document.querySelector("#check");
-// const uploadReviews = document.querySelector("#two-part");
-// const userReviews = document.querySelector("#userReviews");
-
-// bckbtn.style.display = "none";
-// signInBtn.addEventListener("click", () => {
-//   bckbtn.style.display = "block";
-
-// })
-// findVendorBtn.addEventListener("click", () => {
-//   bckbtn.style.display = "block";
-
-// })
-// vendorRegisterBtn.addEventListener("click", () => {
-//   bckbtn.style.display = "block";
-
-// })
-// uploadReviewsBtnBtn.addEventListener("click", () => {
-//   bckbtn.style.display = "block";
-
-// })
-
-// bckbtn.addEventListener("click", () => {
-//   // Hide all other sections
-//   loginContainer.style.display = "none";
-//   eventVendorSection.style.display = "none";
-//   vendorRegistration.style.display = "none";
-//   uploadReviews.style.display = "none";
-
-//   // Show hero section first
-//   heroSection.style.display = "flex";
-
-//   // Now scroll to hero
-//   if (heroSection) {
-//     heroSection.scrollIntoView({ behavior: "smooth", block: "start" });
-//   }
-
-//   // Hide back button again
-//   bckbtn.style.display = "none";
-// });
 
 // Report PopUp for fake reviews
 const reportBtn = document.getElementById("reportBtn");
