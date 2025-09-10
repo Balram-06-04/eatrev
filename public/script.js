@@ -532,4 +532,30 @@ map.on("locationerror", function () {
 //   bckbtn.style.display = "none";
 // });
 
+// Report PopUp for fake reviews
+const reportBtn = document.getElementById("reportBtn");
+const popup = document.getElementById("popup");
+const closePopup = document.getElementById("closePopup");
+const submitReport = document.getElementById("submitReport");
 
+// Show popup
+reportBtn.addEventListener("click", () => {
+  popup.style.display = "flex";
+});
+
+// Close popup
+closePopup.addEventListener("click", () => {
+  popup.style.display = "none";
+});
+
+// Submit report
+submitReport.addEventListener("click", () => {
+  const remark = document.getElementById("remark").value;
+  if (remark.trim() === "") {
+    alert("Please enter your remark before submitting.");
+  } else {
+    alert("Report submitted: " + remark);
+    popup.style.display = "none";
+    document.getElementById("remark").value = "";
+  }
+});
