@@ -1357,21 +1357,14 @@ app-content button:hover {
 
 .back-btn {
   position: fixed;
-  bottom: 20px;
-  /* keep above bottom edge */
-  left: 10px;
-  /* stick to left side */
+  margin: 10px;
   z-index: 100;
-  /* stay above everything */
 
-  background: #ff9036;
-  /* red background */
+  background: #ff8330;
   color: #fff;
-  /* white text */
   border: none;
   border-radius: 8px;
   padding: 10px 18px;
-  /* font-size: 16px; */
   font-weight: 600;
   cursor: pointer;
 
