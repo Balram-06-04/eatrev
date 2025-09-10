@@ -1050,7 +1050,7 @@ app-content button:hover {
   color: #333;
 }
 
-.main #p2 {
+.main .viewBtn {
   font-size: 14px;
   font-weight: bold;
   background-color: #ff9203;
