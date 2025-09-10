@@ -86,13 +86,14 @@ function goBackFromVendors() {
 document.addEventListener("DOMContentLoaded", function () {
   const findVendorsBtn = document.getElementById("find-vendors-btn");
   const vendorSection = document.getElementById("event-vendor-section");
+  const vendorHead = document.getElementById("bookVendorHead");
 
   findVendorsBtn.addEventListener("click", function () {
     // Make sure vendor section is visible
     vendorSection.style.display = "flex";
 
     // Scroll to vendor section smoothly
-    vendorSection.scrollIntoView({ behavior: "smooth" });
+    vendorHead.scrollIntoView({ behavior: "smooth" });
   });
 });
 
@@ -107,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // scroll to userReviews when click explore reviews button
 exploreReviews = document.getElementById("explore-reviews");
 exploreReviews.addEventListener("click", () => {
-  const reviewsSection = document.getElementById("userReviews");
+  const reviewsSection = document.getElementById("streetEatsReview");
   if (reviewsSection) {
     reviewsSection.scrollIntoView({ behavior: "smooth", block: "start" });
   }
@@ -295,34 +296,6 @@ document.addEventListener("DOMContentLoaded", function () {
     showPage();
   });
 
-  // form.addEventListener("submit", function (e) {
-  //   e.preventDefault();
-
-  //   const vendorData = {
-  //     stallName: document.getElementById("stallName").value,
-  //     ownerName: document.getElementById("ownerName").value,
-  //     phone: document.getElementById("phone").value,
-  //     email: document.getElementById("email").value,
-  //     location: document.getElementById("location").value,
-  //     city: document.getElementById("city").value,
-  //     state: document.getElementById("state").value,
-  //     accountNumber: document.getElementById("accountNumber").value,
-  //     ifsc: document.getElementById("ifsc").value,
-  //     description: document.getElementById("description").value
-  //   };
-
-
-  //   // Show success message
-  //   successMsg.style.display = "block";
-
-  //   // Optional: hide after 5 seconds
-  //   setTimeout(() => {
-  //     successMsg.style.display = "none";
-  //   }, 5000);
-
-  //   // Clear form
-  //   form.reset();
-  // });
 });
 
 
@@ -477,31 +450,3 @@ map.on("locationfound", function (e) {
 map.on("locationerror", function () {
   alert("Unable to get your location. Please enable GPS or allow browser location access.");
 });
-
-// Report PopUp for fake reviews
-// const reportBtn = document.getElementById("reportBtn");
-// const popup = document.getElementById("popup");
-// const closePopup = document.getElementById("closePopup");
-// const submitReport = document.getElementById("submitReport");
-
-// Show popup
-// reportBtn.addEventListener("click", () => {
-//   popup.style.display = "flex";
-// });
-
-// // Close popup
-// closePopup.addEventListener("click", () => {
-//   popup.style.display = "none";
-// });
-
-// // Submit report
-// submitReport.addEventListener("click", () => {
-//   const remark = document.getElementById("remark").value;
-//   if (remark.trim() === "") {
-//     alert("Please enter your remark before submitting.");
-//   } else {
-//     alert("Report submitted: " + remark);
-//     popup.style.display = "none";
-//     document.getElementById("remark").value = "";
-//   }
-// });
