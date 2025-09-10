@@ -236,6 +236,14 @@ async function loadUsers() {
           </div>
         </div>
       </div>
+    </div>
+      <div class="popup-overlay" id="popup">
+      <div class="popup-box">
+        <h3>Report Review</h3>
+        <textarea id="remark" placeholder="Enter your remark..."></textarea>
+        <button class="submit-btn" id="submitReport">Submit</button>
+        <button class="close-btn" id="closePopup">Cancel</button>
+      </div>
     </div>`;
   });
 }
