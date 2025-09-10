@@ -208,47 +208,69 @@ async function loadUsers() {
   const reviews = await res.json();
 
   const allReviews = document.getElementById("userReviews");
-  // allUser.innerHTML = "<h2>Hello Dosto</h2>";
   allReviews.innerHTML = ""; // Clear previous content
 
   reviews.forEach(rev => {
     allReviews.innerHTML += ` 
-    <div class="newReviews">
-      <div class="newImg">
-        <img src="${rev.photo}" alt="img" loading="lazy">
-      </div>
-      <div class="newDetail">
-        <div class="main">
-          <p id="p1">${rev.stallName} ${"⭐".repeat(rev.overallRating)}</p>
-          <p id="p2">View</p>
+      <div class="newReviews">
+        <div class="newImg">
+          <img src="${rev.photo}" alt="img" loading="lazy">
         </div>
-        <p>Location : ${rev.stallLocation}</p>
-        <p>Dishes : ${rev.dishName}</p>
-        <p>Review : ${rev.reviewText}</p>
-        <p>Hygiene : ${rev.hygieneCondition}</p>
-        <div class="giveReview">
-          <div class="satisfyButton">
-            <button id="b1">Worth It👌</button>
-            <button id="b2">👎Not Satisfied</button>
+        <div class="newDetail">
+          <div class="main">
+            <p id="p1">${rev.stallName} ${"⭐".repeat(rev.overallRating)}</p>
+            <p id="p2">View</p>
           </div>
-          <div class="report">
-            <p id="reportBtn">Report</p>
+          <p>Location : ${rev.stallLocation}</p>
+          <p>Dishes : ${rev.dishName}</p>
+          <p>Review : ${rev.reviewText}</p>
+          <p>Hygiene : ${rev.hygieneCondition}</p>
+          <div class="giveReview">
+            <div class="satisfyButton">
+              <button id="b1">Worth It👌</button>
+              <button id="b2">👎Not Satisfied</button>
+            </div>
+            <div class="report">
+              <p class="reportBtn">Report</p>   <!-- changed id → class -->
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-      <div class="popup-overlay" id="popup">
-      <div class="popup-box">
-        <h3>Report Review</h3>
-        <textarea id="remark" placeholder="Enter your remark..."></textarea>
-        <button class="submit-btn" id="submitReport">Submit</button>
-        <button class="close-btn" id="closePopup">Cancel</button>
-      </div>
-    </div>`;
+      </div>`;
+  });
+
+  // Attach listeners AFTER rendering
+  document.querySelectorAll(".reportBtn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const popup = document.getElementById("popup");
+      popup.style.display = "flex";
+    });
   });
 }
-
 loadUsers();
+
+
+// Popup logic (only ONE popup in HTML, not inside forEach)
+const popup = document.getElementById("popup");
+const closePopup = document.getElementById("closePopup");
+const submitReport = document.getElementById("submitReport");
+
+// Close popup
+closePopup.addEventListener("click", () => {
+  popup.style.display = "none";
+});
+
+// Submit report
+submitReport.addEventListener("click", () => {
+  const remark = document.getElementById("remark").value;
+  if (remark.trim() === "") {
+    alert("Please enter your remark before submitting.");
+  } else {
+    alert("Report submitted: " + remark);
+    popup.style.display = "none";
+    document.getElementById("remark").value = "";
+  }
+});
+
 
 
 
@@ -457,29 +479,29 @@ map.on("locationerror", function () {
 });
 
 // Report PopUp for fake reviews
-const reportBtn = document.getElementById("reportBtn");
-const popup = document.getElementById("popup");
-const closePopup = document.getElementById("closePopup");
-const submitReport = document.getElementById("submitReport");
+// const reportBtn = document.getElementById("reportBtn");
+// const popup = document.getElementById("popup");
+// const closePopup = document.getElementById("closePopup");
+// const submitReport = document.getElementById("submitReport");
 
 // Show popup
-reportBtn.addEventListener("click", () => {
-  popup.style.display = "flex";
-});
+// reportBtn.addEventListener("click", () => {
+//   popup.style.display = "flex";
+// });
 
-// Close popup
-closePopup.addEventListener("click", () => {
-  popup.style.display = "none";
-});
+// // Close popup
+// closePopup.addEventListener("click", () => {
+//   popup.style.display = "none";
+// });
 
-// Submit report
-submitReport.addEventListener("click", () => {
-  const remark = document.getElementById("remark").value;
-  if (remark.trim() === "") {
-    alert("Please enter your remark before submitting.");
-  } else {
-    alert("Report submitted: " + remark);
-    popup.style.display = "none";
-    document.getElementById("remark").value = "";
-  }
-});
+// // Submit report
+// submitReport.addEventListener("click", () => {
+//   const remark = document.getElementById("remark").value;
+//   if (remark.trim() === "") {
+//     alert("Please enter your remark before submitting.");
+//   } else {
+//     alert("Report submitted: " + remark);
+//     popup.style.display = "none";
+//     document.getElementById("remark").value = "";
+//   }
+// });
