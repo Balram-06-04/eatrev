@@ -220,7 +220,7 @@ async function loadUsers() {
         <div class="newDetail">
           <div class="main">
             <p id="p1">${rev.stallName} ${"⭐".repeat(rev.overallRating)}</p>
-            <p id="p2" onclick="getLocation()">View</p>
+            <p class="viewBtn" data-location="${rev.stallLocation}">View</p>
           </div>
           <p>Location : ${rev.stallLocation}</p>
           <p>Dishes : ${rev.dishName}</p>
@@ -232,7 +232,7 @@ async function loadUsers() {
               <button id="b2">👎Not Satisfied</button>
             </div>
             <div class="report">
-              <p class="reportBtn">Report</p>   <!-- changed id → class -->
+              <p class="reportBtn">Report</p>
             </div>
           </div>
         </div>
@@ -240,6 +240,13 @@ async function loadUsers() {
   });
 
   // Attach listeners AFTER rendering
+  document.querySelectorAll(".viewBtn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const stallLoc = btn.getAttribute("data-location");
+      getLocation(stallLoc);
+    });
+  });
+
   document.querySelectorAll(".reportBtn").forEach(btn => {
     btn.addEventListener("click", () => {
       const popup = document.getElementById("popup");
@@ -249,21 +256,11 @@ async function loadUsers() {
 }
 loadUsers();
 
-function getLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function (position) {
-      const lat = position.coords.latitude;
-      const lon = position.coords.longitude;
-
-      // Open Google Maps in a new tab with user location
-      window.open(`https://www.google.com/maps?q=${lat},${lon}`, "_blank");
-    }, function (error) {
-      alert("Error: " + error.message);
-    });
-  } else {
-    alert("Geolocation is not supported by this browser.");
-  }
+function getLocation(location) {
+  // Open Google Maps with the stall's saved location
+  window.open(`https://www.google.com/maps?q=${encodeURIComponent(location)}`, "_blank");
 }
+
 
 
 // Popup logic (only ONE popup in HTML, not inside forEach)
