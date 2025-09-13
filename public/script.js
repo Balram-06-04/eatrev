@@ -257,12 +257,13 @@ async function loadUsers() {
 loadUsers();
 
 // 🔍 Handle search
+// 🔍 Handle search
 document.querySelector(".search").addEventListener("click", async () => {
   const location = document.querySelector("#search-food input[placeholder='Enter Your Location']").value.trim();
-  const vendor = document.querySelector("#search-food input[placeholder='Search for food, vendors, or dishes']").value.trim();
+  const keyword = document.querySelector("#search-food input[placeholder='Search for food, vendors, or dishes']").value.trim();
 
   try {
-    const res = await fetch(`/searchReviews?location=${encodeURIComponent(location)}&vendor=${encodeURIComponent(vendor)}&food=${encodeURIComponent(vendor)}`);
+    const res = await fetch(`/searchReviews?location=${encodeURIComponent(location)}&food=${encodeURIComponent(keyword)}&vendor=${encodeURIComponent(keyword)}`);
     const reviews = await res.json();
 
     const reviewSection = document.getElementById("userReviews");
@@ -292,11 +293,14 @@ document.querySelector(".search").addEventListener("click", async () => {
         </div>
       `;
     });
+
+    // ✅ Auto-scroll to reviews
     reviewSection.scrollIntoView({ behavior: "smooth" });
   } catch (err) {
     console.error("❌ Error fetching search results:", err);
   }
 });
+
 
 
 
