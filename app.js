@@ -44,7 +44,7 @@ app.get("/getAllReviews", async (req, res) => {
 // Sending search reviews
 // 🔍 Search reviews
 app.get("/searchReviews", async (req, res) => {
-  const { location, food, vendor } = req.query;
+  const { location, food } = req.query;
 
   let filter = {};
 
@@ -53,9 +53,6 @@ app.get("/searchReviews", async (req, res) => {
   }
   if (food) {
     filter.dishName = { $regex: food, $options: "i" };
-  }
-  if (vendor) {
-    filter.stallName = { $regex: vendor, $options: "i" };
   }
 
   try {

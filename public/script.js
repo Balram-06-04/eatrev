@@ -270,35 +270,36 @@ document.getElementById("searchBtn").addEventListener("click", async () => {
 
     if (reviews.length === 0) {
       allReviews.innerHTML = "<p>No matching reviews found.</p>";
-      return;
+    } else {
+      reviews.forEach(rev => {
+        allReviews.innerHTML += ` 
+          <div class="newReviews">
+            <div class="newImg">
+              <img src="${rev.photo}" alt="img" loading="lazy">
+            </div>
+            <div class="newDetail">
+              <div class="main">
+                <p id="p1">${rev.stallName} ${"⭐".repeat(rev.overallRating)}</p>
+                <p class="viewBtn" data-location="${rev.stallLocation}">View</p>
+              </div>
+              <p>Location : ${rev.stallLocation}</p>
+              <p>Dishes : ${rev.dishName}</p>
+              <p>Review : ${rev.reviewText}</p>
+              <p>Hygiene : ${rev.hygieneCondition}</p>
+            </div>
+          </div>`;
+      });
     }
 
-    reviews.forEach(rev => {
-      allReviews.innerHTML += ` 
-        <div class="newReviews">
-          <div class="newImg">
-            <img src="${rev.photo}" alt="img" loading="lazy">
-          </div>
-          <div class="newDetail">
-            <div class="main">
-              <p id="p1">${rev.stallName} ${"⭐".repeat(rev.overallRating)}</p>
-              <p class="viewBtn" data-location="${rev.stallLocation}">View</p>
-            </div>
-            <p>Location : ${rev.stallLocation}</p>
-            <p>Dishes : ${rev.dishName}</p>
-            <p>Review : ${rev.reviewText}</p>
-            <p>Hygiene : ${rev.hygieneCondition}</p>
-          </div>
-        </div>`;
-    });
-    // ✅ Auto-scroll to reviews
+    // Scroll to review section in **all cases**
     const reviewsSection = document.getElementById("streetEatsReview");
-
     reviewsSection.scrollIntoView({ behavior: "smooth" });
+
   } catch (err) {
     console.error("❌ Error searching:", err);
   }
 });
+
 
 
 
