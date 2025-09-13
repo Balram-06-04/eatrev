@@ -257,24 +257,24 @@ async function loadUsers() {
 loadUsers();
 
 // 🔍 Handle search
-document.getElementById("searchBtn").addEventListener("click", async () => {
-  const location = document.getElementById("searchLocation").value;
-  const food = document.getElementById("searchFood").value;
+document.querySelector(".search").addEventListener("click", async () => {
+  const location = document.querySelector("#search-food input[placeholder='Enter Your Location']").value.trim();
+  const vendor = document.querySelector("#search-food input[placeholder='Search for food, vendors, or dishes']").value.trim();
 
   try {
-    const res = await fetch(`/searchReviews?location=${location}&food=${food}`);
+    const res = await fetch(`/searchReviews?location=${encodeURIComponent(location)}&vendor=${encodeURIComponent(vendor)}&food=${encodeURIComponent(vendor)}`);
     const reviews = await res.json();
 
-    const allReviews = document.getElementById("userReviews");
-    allReviews.innerHTML = "";
+    const reviewSection = document.getElementById("userReviews");
+    reviewSection.innerHTML = ""; // clear old reviews
 
     if (reviews.length === 0) {
-      allReviews.innerHTML = "<p>No matching reviews found.</p>";
+      reviewSection.innerHTML = `<p>No matching reviews found.</p>`;
       return;
     }
 
     reviews.forEach(rev => {
-      allReviews.innerHTML += ` 
+      reviewSection.innerHTML += `
         <div class="newReviews">
           <div class="newImg">
             <img src="${rev.photo}" alt="img" loading="lazy">
@@ -282,19 +282,22 @@ document.getElementById("searchBtn").addEventListener("click", async () => {
           <div class="newDetail">
             <div class="main">
               <p id="p1">${rev.stallName} ${"⭐".repeat(rev.overallRating)}</p>
-              <p class="viewBtn" data-location="${rev.stallLocation}">View</p>
+              <p id="p2">${rev.stallLocation}</p>
+              <p id="p3"><b>Dishes:</b> ${rev.dishName}</p>
+              <p id="p4"><b>Review:</b> ${rev.reviewText}</p>
+              <p id="p5"><b>Hygiene:</b> ${rev.hygieneCondition}</p>
+              <p id="p6"><b>Worth it?:</b> ${rev.worthIt}</p>
             </div>
-            <p>Location : ${rev.stallLocation}</p>
-            <p>Dishes : ${rev.dishName}</p>
-            <p>Review : ${rev.reviewText}</p>
-            <p>Hygiene : ${rev.hygieneCondition}</p>
           </div>
-        </div>`;
+        </div>
+      `;
     });
+    reviewSection.scrollIntoView({ behavior: "smooth" });
   } catch (err) {
-    console.error("❌ Error searching:", err);
+    console.error("❌ Error fetching search results:", err);
   }
 });
+
 
 
 
