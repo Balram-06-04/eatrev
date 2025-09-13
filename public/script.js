@@ -292,7 +292,9 @@ document.getElementById("searchBtn").addEventListener("click", async () => {
         </div>`;
     });
     // ✅ Auto-scroll to reviews
-    reviewSection.scrollIntoView({ behavior: "smooth" });
+    const reviewsSection = document.getElementById("streetEatsReview");
+
+    reviewsSection.scrollIntoView({ behavior: "smooth" });
   } catch (err) {
     console.error("❌ Error searching:", err);
   }
