@@ -257,25 +257,24 @@ async function loadUsers() {
 loadUsers();
 
 // 🔍 Handle search
-// 🔍 Handle search
-document.querySelector(".search").addEventListener("click", async () => {
-  const location = document.querySelector("#search-food input[placeholder='Enter Your Location']").value.trim();
-  const keyword = document.querySelector("#search-food input[placeholder='Search for food, vendors, or dishes']").value.trim();
+document.getElementById("searchBtn").addEventListener("click", async () => {
+  const location = document.getElementById("searchLocation").value;
+  const food = document.getElementById("searchFood").value;
 
   try {
-    const res = await fetch(`/searchReviews?location=${encodeURIComponent(location)}&food=${encodeURIComponent(keyword)}&vendor=${encodeURIComponent(keyword)}`);
+    const res = await fetch(`/searchReviews?location=${location}&food=${food}`);
     const reviews = await res.json();
 
-    const reviewSection = document.getElementById("userReviews");
-    reviewSection.innerHTML = ""; // clear old reviews
+    const allReviews = document.getElementById("userReviews");
+    allReviews.innerHTML = "";
 
     if (reviews.length === 0) {
-      reviewSection.innerHTML = `<p>No matching reviews found.</p>`;
+      allReviews.innerHTML = "<p>No matching reviews found.</p>";
       return;
     }
 
     reviews.forEach(rev => {
-      reviewSection.innerHTML += `
+      allReviews.innerHTML += ` 
         <div class="newReviews">
           <div class="newImg">
             <img src="${rev.photo}" alt="img" loading="lazy">
@@ -283,25 +282,21 @@ document.querySelector(".search").addEventListener("click", async () => {
           <div class="newDetail">
             <div class="main">
               <p id="p1">${rev.stallName} ${"⭐".repeat(rev.overallRating)}</p>
-              <p id="p2">${rev.stallLocation}</p>
-              <p id="p3"><b>Dishes:</b> ${rev.dishName}</p>
-              <p id="p4"><b>Review:</b> ${rev.reviewText}</p>
-              <p id="p5"><b>Hygiene:</b> ${rev.hygieneCondition}</p>
-              <p id="p6"><b>Worth it?:</b> ${rev.worthIt}</p>
+              <p class="viewBtn" data-location="${rev.stallLocation}">View</p>
             </div>
+            <p>Location : ${rev.stallLocation}</p>
+            <p>Dishes : ${rev.dishName}</p>
+            <p>Review : ${rev.reviewText}</p>
+            <p>Hygiene : ${rev.hygieneCondition}</p>
           </div>
-        </div>
-      `;
+        </div>`;
     });
-
     // ✅ Auto-scroll to reviews
     reviewSection.scrollIntoView({ behavior: "smooth" });
   } catch (err) {
-    console.error("❌ Error fetching search results:", err);
+    console.error("❌ Error searching:", err);
   }
 });
-
-
 
 
 
