@@ -256,6 +256,48 @@ async function loadUsers() {
 }
 loadUsers();
 
+// 🔍 Handle search
+document.getElementById("searchBtn").addEventListener("click", async () => {
+  const location = document.getElementById("searchLocation").value;
+  const food = document.getElementById("searchFood").value;
+
+  try {
+    const res = await fetch(`/searchReviews?location=${location}&food=${food}`);
+    const reviews = await res.json();
+
+    const allReviews = document.getElementById("userReviews");
+    allReviews.innerHTML = "";
+
+    if (reviews.length === 0) {
+      allReviews.innerHTML = "<p>No matching reviews found.</p>";
+      return;
+    }
+
+    reviews.forEach(rev => {
+      allReviews.innerHTML += ` 
+        <div class="newReviews">
+          <div class="newImg">
+            <img src="${rev.photo}" alt="img" loading="lazy">
+          </div>
+          <div class="newDetail">
+            <div class="main">
+              <p id="p1">${rev.stallName} ${"⭐".repeat(rev.overallRating)}</p>
+              <p class="viewBtn" data-location="${rev.stallLocation}">View</p>
+            </div>
+            <p>Location : ${rev.stallLocation}</p>
+            <p>Dishes : ${rev.dishName}</p>
+            <p>Review : ${rev.reviewText}</p>
+            <p>Hygiene : ${rev.hygieneCondition}</p>
+          </div>
+        </div>`;
+    });
+  } catch (err) {
+    console.error("❌ Error searching:", err);
+  }
+});
+
+
+
 function getLocation(location) {
   // Open Google Maps with the stall's saved location
   window.open(`https://www.google.com/maps?q=${encodeURIComponent(location)}`, "_blank");

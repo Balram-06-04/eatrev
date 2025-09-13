@@ -41,6 +41,32 @@ app.get("/getAllReviews", async (req, res) => {
   }
 });
 
+// Sending search reviews
+// 🔍 Search reviews
+app.get("/searchReviews", async (req, res) => {
+  const { location, food, vendor } = req.query;
+
+  let filter = {};
+
+  if (location) {
+    filter.stallLocation = { $regex: location, $options: "i" }; // case-insensitive
+  }
+  if (food) {
+    filter.dishName = { $regex: food, $options: "i" };
+  }
+  if (vendor) {
+    filter.stallName = { $regex: vendor, $options: "i" };
+  }
+
+  try {
+    const reviews = await Review.find(filter).sort({ createdAt: -1 });
+    res.json(reviews);
+  } catch (err) {
+    console.error("❌ Search error:", err);
+    res.status(500).json({ message: "Error searching reviews" });
+  }
+});
+
 
 // Saving street food reviews
 app.post("/submit", upload.single("image"), async (req, res) => {
@@ -77,7 +103,7 @@ app.post("/submit", upload.single("image"), async (req, res) => {
 });
 
 // Saving vendor data
-app.post("/vendorData",upload.single("image"), async (req, res) => {
+app.post("/vendorData", upload.single("image"), async (req, res) => {
   const { stallName, phone, email, location, state, city, accountNumber, ifsc, description } = req.body;
 
   try {
@@ -89,7 +115,7 @@ app.post("/vendorData",upload.single("image"), async (req, res) => {
     // Delete temp file
     fs.unlinkSync(req.file.path);
     const newVendor = new Vendor({
-      stallName, phone, email, location, state, city, accountNumber, ifsc, description,photo: picture.secure_url, // save Cloudinary URL
+      stallName, phone, email, location, state, city, accountNumber, ifsc, description, photo: picture.secure_url, // save Cloudinary URL
     });
 
     await newVendor.save();
