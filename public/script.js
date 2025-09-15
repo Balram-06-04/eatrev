@@ -266,7 +266,7 @@ document.getElementById("searchBtn").addEventListener("click", async () => {
     const reviews = await res.json();
 
     const allReviews = document.getElementById("search-result");
-    allReviews.innerHTML = "";
+    allReviews.innerHTML = `<h2>Search result</h2>`;
 
     if (reviews.length === 0) {
       allReviews.innerHTML = "<p>No matching reviews found.</p>";
@@ -315,8 +315,10 @@ document.getElementById("searchBtn").addEventListener("click", async () => {
       });
     }
 
-    const reviewsSection = document.getElementById("streetEatsReview");
-    reviewsSection.scrollIntoView({ behavior: "smooth" });
+    // const reviewsSection = document.getElementById("streetEatsReview");
+    // reviewsSection.scrollIntoView({ behavior: "smooth" });
+    
+    allReviews.scrollIntoView({ behavior: "smooth" });
 
   } catch (err) {
     console.error("❌ Error searching:", err);
