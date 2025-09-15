@@ -273,21 +273,30 @@ document.getElementById("searchBtn").addEventListener("click", async () => {
     } else {
       reviews.forEach(rev => {
         allReviews.innerHTML += ` 
-          <div class="newReviews">
-            <div class="newImg">
-              <img src="${rev.photo}" alt="img" loading="lazy">
+         <div class="newReviews">
+        <div class="newImg">
+          <img src="${rev.photo}" alt="img" loading="lazy">
+        </div>
+        <div class="newDetail">
+          <div class="main">
+            <p id="p1">${rev.stallName} ${"⭐".repeat(rev.overallRating)}</p>
+            <p class="viewBtn" data-location="${rev.stallLocation}">View</p>
+          </div>
+          <p>Location : ${rev.stallLocation}</p>
+          <p>Dishes : ${rev.dishName}</p>
+          <p>Review : ${rev.reviewText}</p>
+          <p>Hygiene : ${rev.hygieneCondition}</p>
+          <div class="giveReview">
+            <div class="satisfyButton">
+              <button id="b1">Worth It👌</button>
+              <button id="b2">👎Not Satisfied</button>
             </div>
-            <div class="newDetail">
-              <div class="main">
-                <p id="p1">${rev.stallName} ${"⭐".repeat(rev.overallRating)}</p>
-                <p class="viewBtn" data-location="${rev.stallLocation}">View</p>
-              </div>
-              <p>Location : ${rev.stallLocation}</p>
-              <p>Dishes : ${rev.dishName}</p>
-              <p>Review : ${rev.reviewText}</p>
-              <p>Hygiene : ${rev.hygieneCondition}</p>
+            <div class="report">
+              <p class="reportBtn">Report</p>
             </div>
-          </div>`;
+          </div>
+        </div>
+      </div>`;
       });
     }
 
