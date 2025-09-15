@@ -265,7 +265,7 @@ document.getElementById("searchBtn").addEventListener("click", async () => {
     const res = await fetch(`/searchReviews?location=${location}&food=${food}`);
     const reviews = await res.json();
 
-    const allReviews = document.getElementById("userReviews");
+    const allReviews = document.getElementById("search-result");
     allReviews.innerHTML = "";
 
     if (reviews.length === 0) {
@@ -273,34 +273,48 @@ document.getElementById("searchBtn").addEventListener("click", async () => {
     } else {
       reviews.forEach(rev => {
         allReviews.innerHTML += ` 
-         <div class="newReviews">
-        <div class="newImg">
-          <img src="${rev.photo}" alt="img" loading="lazy">
-        </div>
-        <div class="newDetail">
-          <div class="main">
-            <p id="p1">${rev.stallName} ${"⭐".repeat(rev.overallRating)}</p>
-            <p class="viewBtn" data-location="${rev.stallLocation}">View</p>
-          </div>
-          <p>Location : ${rev.stallLocation}</p>
-          <p>Dishes : ${rev.dishName}</p>
-          <p>Review : ${rev.reviewText}</p>
-          <p>Hygiene : ${rev.hygieneCondition}</p>
-          <div class="giveReview">
-            <div class="satisfyButton">
-              <button id="b1">Worth It👌</button>
-              <button id="b2">👎Not Satisfied</button>
+          <div class="newReviews">
+            <div class="newImg">
+              <img src="${rev.photo}" alt="img" loading="lazy">
             </div>
-            <div class="report">
-              <p class="reportBtn">Report</p>
+            <div class="newDetail">
+              <div class="main">
+                <p id="p1">${rev.stallName} ${"⭐".repeat(rev.overallRating)}</p>
+                <p class="viewBtn" data-location="${rev.stallLocation}">View</p>
+              </div>
+              <p>Location : ${rev.stallLocation}</p>
+              <p>Dishes : ${rev.dishName}</p>
+              <p>Review : ${rev.reviewText}</p>
+              <p>Hygiene : ${rev.hygieneCondition}</p>
+              <div class="giveReview">
+                <div class="satisfyButton">
+                  <button id="b1">Worth It👌</button>
+                  <button id="b2">👎Not Satisfied</button>
+                </div>
+                <div class="report">
+                  <p class="reportBtn">Report</p>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </div>`;
+          </div>`;
+      });
+
+      // ✅ Attach event listeners to View buttons in search results
+      document.querySelectorAll(".viewBtn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const stallLoc = btn.getAttribute("data-location");
+          getLocation(stallLoc);
+        });
+      });
+
+      // ✅ Attach event listeners to Report buttons (optional)
+      document.querySelectorAll(".reportBtn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          document.getElementById("popup").style.display = "flex";
+        });
       });
     }
 
-    // Scroll to review section in **all cases**
     const reviewsSection = document.getElementById("streetEatsReview");
     reviewsSection.scrollIntoView({ behavior: "smooth" });
 
@@ -308,6 +322,7 @@ document.getElementById("searchBtn").addEventListener("click", async () => {
     console.error("❌ Error searching:", err);
   }
 });
+
 
 
 

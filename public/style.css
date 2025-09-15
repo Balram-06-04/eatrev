@@ -912,7 +912,7 @@ app-content button:hover {
 }
 
 /* New User Reviews : */
-.userReviews {
+.userReviews, #search-result {
   display: flex;
   justify-content: center;
   align-items: center;
