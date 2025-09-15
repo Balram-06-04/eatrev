@@ -258,18 +258,19 @@ loadUsers();
 
 // 🔍 Handle search
 document.getElementById("searchBtn").addEventListener("click", async () => {
-  const location = document.getElementById("searchLocation").value;
-  const food = document.getElementById("searchFood").value;
+  const location = document.getElementById("searchLocation").value.trim();
+  const food = document.getElementById("searchFood").value.trim();
+
+  const allReviews = document.getElementById("search-result");
+  allReviews.innerHTML = "<h2>Search Results</h2>"; // reset with heading
+  allReviews.style.display = "flex"; // show the results section
 
   try {
     const res = await fetch(`/searchReviews?location=${location}&food=${food}`);
     const reviews = await res.json();
 
-    const allReviews = document.getElementById("search-result");
-    allReviews.innerHTML = `<h2>Search result</h2>`;
-
     if (reviews.length === 0) {
-      allReviews.innerHTML = "<p>No matching reviews found.</p>";
+      allReviews.innerHTML += "<p>No matching reviews found.</p>";
     } else {
       reviews.forEach(rev => {
         allReviews.innerHTML += ` 
@@ -288,8 +289,8 @@ document.getElementById("searchBtn").addEventListener("click", async () => {
               <p>Hygiene : ${rev.hygieneCondition}</p>
               <div class="giveReview">
                 <div class="satisfyButton">
-                  <button id="b1">Worth It👌</button>
-                  <button id="b2">👎Not Satisfied</button>
+                  <button class="b1">Worth It👌</button>
+                  <button class="b2">👎Not Satisfied</button>
                 </div>
                 <div class="report">
                   <p class="reportBtn">Report</p>
@@ -299,7 +300,7 @@ document.getElementById("searchBtn").addEventListener("click", async () => {
           </div>`;
       });
 
-      // ✅ Attach event listeners to View buttons in search results
+      // ✅ Attach event listeners to "View" buttons
       document.querySelectorAll(".viewBtn").forEach(btn => {
         btn.addEventListener("click", () => {
           const stallLoc = btn.getAttribute("data-location");
@@ -307,7 +308,7 @@ document.getElementById("searchBtn").addEventListener("click", async () => {
         });
       });
 
-      // ✅ Attach event listeners to Report buttons (optional)
+      // ✅ Attach event listeners to "Report" buttons
       document.querySelectorAll(".reportBtn").forEach(btn => {
         btn.addEventListener("click", () => {
           document.getElementById("popup").style.display = "flex";
@@ -315,15 +316,13 @@ document.getElementById("searchBtn").addEventListener("click", async () => {
       });
     }
 
-    // const reviewsSection = document.getElementById("streetEatsReview");
-    // reviewsSection.scrollIntoView({ behavior: "smooth" });
-    
     allReviews.scrollIntoView({ behavior: "smooth" });
 
   } catch (err) {
     console.error("❌ Error searching:", err);
   }
 });
+
 
 
 
