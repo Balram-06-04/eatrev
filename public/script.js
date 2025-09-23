@@ -247,6 +247,8 @@ async function loadUsers() {
       const lat = btn.getAttribute("data-lat");
       const lng = btn.getAttribute("data-lng");
 
+
+      console.log("Opening map with:", stallLoc, lat, lng);
       getLocation(stallLoc, lat, lng);
     });
   });
@@ -305,7 +307,10 @@ document.getElementById("searchBtn").addEventListener("click", async () => {
             <div class="newDetail">
               <div class="main">
                 <p id="p1">${rev.stallName} ${"⭐".repeat(rev.overallRating)}</p>
-                <p class="viewBtn" data-location="${rev.stallLocation}">View</p>
+                < p class="viewBtn" 
+                data-location="${rev.stallLocation}" 
+                data-lat="${rev.latitude}" 
+                data-lng="${rev.longitude}">View</p>
               </div>
               <p>Location : ${rev.stallLocation}</p>
               <p>Dishes : ${rev.dishName}</p>
@@ -328,9 +333,14 @@ document.getElementById("searchBtn").addEventListener("click", async () => {
       document.querySelectorAll(".viewBtn").forEach(btn => {
         btn.addEventListener("click", () => {
           const stallLoc = btn.getAttribute("data-location");
-          getLocation(stallLoc);
+          const lat = btn.getAttribute("data-lat");
+          const lng = btn.getAttribute("data-lng");
+
+          console.log("Opening map with:", stallLoc, lat, lng);
+          getLocation(stallLoc, lat, lng);
         });
       });
+
 
       // ✅ Attach event listeners to "Report" buttons
       document.querySelectorAll(".reportBtn").forEach(btn => {
