@@ -41,8 +41,8 @@ app.get("/getAllReviews", async (req, res) => {
   }
 });
 
-// Sending search reviews
 // 🔍 Search reviews
+// Sending search reviews
 app.get("/searchReviews", async (req, res) => {
   const { location, food } = req.query;
 
@@ -67,7 +67,7 @@ app.get("/searchReviews", async (req, res) => {
 
 // Saving street food reviews
 app.post("/submit", upload.single("image"), async (req, res) => {
-  const { stallName, stallLocation, dishName, reviewText, hygieneCondition, overallRating, worthIt } = req.body;
+  const { stallName, stallLocation, dishName, reviewText, hygieneCondition, overallRating, worthIt, latitude, longitude } = req.body;
 
   try {
     // Upload image to Cloudinary
@@ -89,6 +89,7 @@ app.post("/submit", upload.single("image"), async (req, res) => {
       worthIt,
       photo: result.secure_url, // save Cloudinary URL
     });
+
 
     await newReview.save();
     res.status(201).json(newReview);

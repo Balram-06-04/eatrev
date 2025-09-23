@@ -257,6 +257,25 @@ async function loadUsers() {
 }
 loadUsers();
 
+
+window.addEventListener("DOMContentLoaded", () => {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        document.getElementById("latitude").value = position.coords.latitude;
+        document.getElementById("longitude").value = position.coords.longitude;
+      },
+      (error) => {
+        console.warn("Geolocation error:", error.message);
+        // Optional: fallback logic or user alert
+      }
+    );
+  } else {
+    console.warn("Geolocation is not supported by this browser.");
+  }
+});
+
+
 // 🔍 Handle search
 document.getElementById("searchBtn").addEventListener("click", async () => {
   const location = document.getElementById("searchLocation").value.trim();

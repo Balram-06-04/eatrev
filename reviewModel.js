@@ -40,6 +40,13 @@ const reviewSchema = new mongoose.Schema({
     photo: {
         type: String, // we will store the photo URL or filename here
     },
+    latitude: {
+        type: Number,
+    },
+    longitude: {
+        type: Number,
+    },
+
     createdAt: {
         type: Date,
         default: Date.now
