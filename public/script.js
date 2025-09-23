@@ -307,10 +307,12 @@ document.getElementById("searchBtn").addEventListener("click", async () => {
             <div class="newDetail">
               <div class="main">
                 <p id="p1">${rev.stallName} ${"⭐".repeat(rev.overallRating)}</p>
-                < p class="viewBtn" 
+                <p id="p1">${rev.stallName} ${"⭐".repeat(rev.overallRating)}</p>
+                <p class="viewBtn" 
                 data-location="${rev.stallLocation}" 
                 data-lat="${rev.latitude}" 
                 data-lng="${rev.longitude}">View</p>
+
               </div>
               <p>Location : ${rev.stallLocation}</p>
               <p>Dishes : ${rev.dishName}</p>
