@@ -220,7 +220,7 @@ async function loadUsers() {
         <div class="newDetail">
           <div class="main">
             <p id="p1">${rev.stallName} ${"⭐".repeat(rev.overallRating)}</p>
-            <p class="viewBtn" data-location="${rev.stallLocation}">View</p>
+            <p class="viewBtn" data-location="${rev.stallLocation}" data-lat="${rev.latitude}" data-lng="${rev.longitude}">View</p>
           </div>
           <p>Location : ${rev.stallLocation}</p>
           <p>Dishes : ${rev.dishName}</p>
@@ -244,9 +244,13 @@ async function loadUsers() {
   document.querySelectorAll(".viewBtn").forEach(btn => {
     btn.addEventListener("click", () => {
       const stallLoc = btn.getAttribute("data-location");
-      getLocation(stallLoc);
+      const lat = btn.getAttribute("data-lat");
+      const lng = btn.getAttribute("data-lng");
+
+      getLocation(stallLoc, lat, lng);
     });
   });
+
 
   document.querySelectorAll(".reportBtn").forEach(btn => {
     btn.addEventListener("click", () => {
@@ -348,10 +352,15 @@ document.getElementById("searchBtn").addEventListener("click", async () => {
 
 
 
-function getLocation(location) {
-  // Open Google Maps with the stall's saved location
-  window.open(`https://www.google.com/maps?q=${encodeURIComponent(location)}`, "_blank");
+function getLocation(location, latitude, longitude) {
+  if (latitude && longitude) {
+    window.open(`https://www.google.com/maps?q=${latitude},${longitude}`, "_blank");
+  } else {
+    // Fallback to text-based location
+    window.open(`https://www.google.com/maps?q=${encodeURIComponent(location)}`, "_blank");
+  }
 }
+
 
 
 
