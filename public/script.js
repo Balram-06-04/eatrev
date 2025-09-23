@@ -226,6 +226,7 @@ async function loadUsers() {
           <p>Dishes : ${rev.dishName}</p>
           <p>Review : ${rev.reviewText}</p>
           <p>Hygiene : ${rev.hygieneCondition}</p>
+          <p><strong>Reviewed On:</strong> ${new Date(rev.createdAt).toLocaleString()}</p>
           <div class="giveReview">
             <div class="satisfyButton">
               <button id="b1">Worth It👌</button>
