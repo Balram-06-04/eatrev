@@ -66,19 +66,29 @@ app.get("/searchReviews", async (req, res) => {
 
 
 // Saving street food reviews
+// Saving street food reviews
 app.post("/submit", upload.single("image"), async (req, res) => {
-  const { stallName, stallLocation, dishName, reviewText, hygieneCondition, overallRating, worthIt, latitude, longitude } = req.body;
+  const {
+    stallName,
+    stallLocation,
+    dishName,
+    reviewText,
+    hygieneCondition,
+    overallRating,
+    worthIt,
+    latitude,
+    longitude
+  } = req.body;
 
   try {
     // Upload image to Cloudinary
     const result = await cloudinary.uploader.upload(req.file.path, {
-      folder: "users", // optional folder name in Cloudinary
+      folder: "users",
     });
 
-    // Delete temp file
-    fs.unlinkSync(req.file.path);
+    fs.unlinkSync(req.file.path); // Delete local file
 
-    // Save review
+    // ✅ INCLUDE LATITUDE & LONGITUDE HERE
     const newReview = new Review({
       stallName,
       stallLocation,
@@ -87,18 +97,19 @@ app.post("/submit", upload.single("image"), async (req, res) => {
       hygieneCondition,
       overallRating,
       worthIt,
-      photo: result.secure_url, // save Cloudinary URL
+      photo: result.secure_url,
+      latitude: parseFloat(latitude),      // Important to parse to Number
+      longitude: parseFloat(longitude)
     });
-
 
     await newReview.save();
     res.status(201).json(newReview);
-
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Error saving data" });
   }
 });
+
 
 // Saving vendor data
 app.post("/vendorData", upload.single("image"), async (req, res) => {
