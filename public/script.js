@@ -289,7 +289,7 @@ document.getElementById("searchBtn").addEventListener("click", async () => {
 
   const allReviews = document.getElementById("search-result");
   allReviews.innerHTML = "<h2>Search Results</h2>"; // reset with heading
-  allReviews.style.display = "flex"; // show the results section
+  allReviews.style.display = "flex"; // show the results section.
 
   try {
     const res = await fetch(`/searchReviews?location=${location}&food=${food}`);
