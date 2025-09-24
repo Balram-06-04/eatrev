@@ -226,7 +226,13 @@ async function loadUsers() {
           <p>Dishes : ${rev.dishName}</p>
           <p>Review : ${rev.reviewText}</p>
           <p>Hygiene : ${rev.hygieneCondition}</p>
-          <p>On ${new Date(rev.createdAt).getDate()}/${new Date(rev.createdAt).getMonth() + 1}/${new Date(rev.createdAt).getFullYear()}</p>
+          <p>
+            ${new Date(rev.createdAt).getDate()}/
+            ${new Date(rev.createdAt).getMonth() + 1}/
+            ${new Date(rev.createdAt).getFullYear()} ,
+            ${new Date(rev.createdAt).getHours()}:${String(new Date(rev.createdAt).getMinutes()).padStart(2, '0')}
+          </p>
+
           <div class="giveReview">
             <div class="satisfyButton">
               <button id="b1">Worth It👌</button>
@@ -317,6 +323,12 @@ document.getElementById("searchBtn").addEventListener("click", async () => {
               <p>Dishes : ${rev.dishName}</p>
               <p>Review : ${rev.reviewText}</p>
               <p>Hygiene : ${rev.hygieneCondition}</p>
+                 <p>
+                ${new Date(rev.createdAt).getDate()}/
+                ${new Date(rev.createdAt).getMonth() + 1}/
+                ${new Date(rev.createdAt).getFullYear()} ,
+                ${new Date(rev.createdAt).getHours()}:${String(new Date(rev.createdAt).getMinutes()).padStart(2, '0')}
+          </p>
               <div class="giveReview">
                 <div class="satisfyButton">
                   <button class="b1">Worth It👌</button>
@@ -481,7 +493,6 @@ async function loadVendors() {
         <p><strong>Special Dishes:</strong> ${v.description}</p>
         <p><strong>Location:</strong> ${v.city}, ${v.state}</p>
         <p><strong>Contact:</strong> ${v.phone}</p>
-        <p><strong>Email:</strong> ${v.email}</p>
         <p><strong>Price Range:</strong> ₹2000 - ₹5000 per event</p>
         <p><strong>Rating:</strong> ⭐⭐⭐⭐ (4.5/5)</p>
 
