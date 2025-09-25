@@ -35,7 +35,7 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
+  padding: 1rem 1.5rem;
 }
 
 
@@ -108,8 +108,6 @@ nav {
     /* pushes logo left, links right */
     align-items: center;
     padding: 0.5rem 0;
-    background: white;
-    border-bottom: 1px solid #ddd;
     width: 100%;
     box-sizing: border-box;
   }
