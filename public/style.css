@@ -85,13 +85,13 @@ nav {
 }
 
 .img img {
-  margin: 5px 0px 0px 5px;
+  /* margin: 5px 0px 0px 5px; */
 
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 60px;
-  height: 60px;
+  width: 55px;
+  height: 55px;
   object-fit: cover;
   border-radius: 50%;
   border: 2px solid #ff5722;
@@ -119,13 +119,16 @@ nav {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-left: 1rem;
+  margin-left: 0.5rem;
   color: #eb8d19;
 }
 
-.header p {
-  font-family: "Arial Narrow Bold", sans-serif;
-  font-size: 1.3rem;
+.header h1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family:'Times New Roman', Times, serif
+  font-size: 1.6rem;
 }
 
 @media (max-width: 500px) {
