@@ -457,7 +457,7 @@ document.getElementById('vendorForm').addEventListener('submit', async function 
     });
 
     if (res.ok) {
-      showToast("✅ Vendor registered successfully!", "success");
+      showToast("✅ Vendor registered successfully! ", "success");
       this.reset();
       loadVendors();
 
