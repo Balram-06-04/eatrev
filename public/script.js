@@ -220,7 +220,7 @@ async function loadUsers() {
         <div class="newDetail">
           <div class="main">
             <p id="p1">${rev.stallName} ${"⭐".repeat(rev.overallRating)}</p>
-            <p class="viewBtn" data-location="${rev.stallLocation}" data-lat="${rev.latitude}" data-lng="${rev.longitude}">View</p>
+            <p class="viewBtn" data-location="${rev.stallLocation}" data-lat="${rev.latitude}" data-lng="${rev.longitude}">📍 View</p>
           </div>
           <p>Location : ${rev.stallLocation}</p>
           <p>Dishes : ${rev.dishName}</p>
@@ -239,7 +239,7 @@ async function loadUsers() {
               <button id="b2">👎Not Satisfied</button>
             </div>
             <div class="report">
-              <p class="reportBtn">Report</p>
+              <p class="reportBtn">🚨 Report</p>
             </div>
           </div>
         </div>
@@ -316,7 +316,7 @@ document.getElementById("searchBtn").addEventListener("click", async () => {
                 <p class="viewBtn" 
                 data-location="${rev.stallLocation}" 
                 data-lat="${rev.latitude}" 
-                data-lng="${rev.longitude}">📍View</p>
+                data-lng="${rev.longitude}">📍 View</p>
 
               </div>
               <p>Location : ${rev.stallLocation}</p>
@@ -343,7 +343,7 @@ document.getElementById("searchBtn").addEventListener("click", async () => {
                   <button class="b2">👎Not Satisfied</button>
                 </div>
                 <div class="report">
-                  <p class="reportBtn">🚨Report</p>
+                  <p class="reportBtn">🚨 Report</p>
                 </div>
               </div>
             </div>

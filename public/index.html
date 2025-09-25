@@ -214,9 +214,17 @@
           style="color: #000; font-weight: 600">
 
         <label for="stall-location">Famous Place / Landmark</label>
-        <input type="text" id="stall-location" name="stallLocation" placeholder="e.g. Near Bus Stand" required
-          style="color: #000; font-weight: 600">
-        <button id="getLocationBtn">📍 Share Location</button>
+        <!-- Wrap location and button in a flex container -->
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+          <input type="text" id="stall-location" name="stallLocation" placeholder="e.g. Near Bus Stand" required
+            style="color: #000; font-weight: 600; flex: 1; padding: 10px;">
+
+          <button type="button" id="getLocationBtn"
+            style="padding: 6px; background-color: #ffffff; border: none; border-radius: 10px; cursor: pointer;">
+            📍 Share Stall Location
+          </button>
+        </div>
+
         <input type="hidden" id="latitude" name="latitude">
         <input type="hidden" id="longitude" name="longitude">
 
