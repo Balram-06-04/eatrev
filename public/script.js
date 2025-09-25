@@ -270,22 +270,22 @@ async function loadUsers() {
 loadUsers();
 
 
-window.addEventListener("DOMContentLoaded", () => {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        document.getElementById("latitude").value = position.coords.latitude;
-        document.getElementById("longitude").value = position.coords.longitude;
-      },
-      (error) => {
-        console.warn("Geolocation error:", error.message);
-        // Optional: fallback logic or user alert
-      }
-    );
-  } else {
-    console.warn("Geolocation is not supported by this browser.");
-  }
-});
+document.getElementById("getLocationBtn").addEventListener("click", () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          document.getElementById("latitude").value = position.coords.latitude;
+          document.getElementById("longitude").value = position.coords.longitude;
+          alert("✅ Location added successfully!");
+        },
+        (error) => {
+          alert("⚠️ Location access denied or unavailable.");
+        }
+      );
+    } else {
+      alert("❌ Geolocation is not supported by this browser.");
+    }
+  });
 
 
 // 🔍 Handle search
@@ -316,26 +316,34 @@ document.getElementById("searchBtn").addEventListener("click", async () => {
                 <p class="viewBtn" 
                 data-location="${rev.stallLocation}" 
                 data-lat="${rev.latitude}" 
-                data-lng="${rev.longitude}">View</p>
+                data-lng="${rev.longitude}">📍View</p>
 
               </div>
               <p>Location : ${rev.stallLocation}</p>
               <p>Dishes : ${rev.dishName}</p>
               <p>Review : ${rev.reviewText}</p>
               <p>Hygiene : ${rev.hygieneCondition}</p>
-                 <p>
+               <p>
                 ${new Date(rev.createdAt).getDate()}/
                 ${new Date(rev.createdAt).getMonth() + 1}/
                 ${new Date(rev.createdAt).getFullYear()} ,
-                ${new Date(rev.createdAt).getHours()}:${String(new Date(rev.createdAt).getMinutes()).padStart(2, '0')}
-          </p>
+                ${(() => {
+                    const date = new Date(rev.createdAt);
+                    let hours = date.getHours();
+                    const minutes = String(date.getMinutes()).padStart(2, "0");
+                    const ampm = hours >= 12 ? "PM" : "AM";
+                    hours = hours % 12 || 12; // convert 0 → 12, 13 → 1
+                    return `${hours}:${minutes} ${ampm}`;
+                })()}
+              </p>
+
               <div class="giveReview">
                 <div class="satisfyButton">
                   <button class="b1">Worth It👌</button>
                   <button class="b2">👎Not Satisfied</button>
                 </div>
                 <div class="report">
-                  <p class="reportBtn">Report</p>
+                  <p class="reportBtn">🚨Report</p>
                 </div>
               </div>
             </div>

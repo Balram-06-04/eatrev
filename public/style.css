@@ -43,12 +43,13 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 50px;
-  margin-bottom: 10px;
+  height:50px;
+  margin-bottom: 8px;
   margin-top: 5px;
-   position: relative;
+  position: relative;
   top: 0;
   z-index: 1000;
+  /* border: 2px solid; */
 }
 
 .logo {
@@ -95,7 +96,7 @@ nav {
   justify-content: center;
   align-items: center;
   width: 65px;
-  height: 65px;
+  height: 50px;
   object-fit: cover;
   border-radius: 50%;
   /* border: 2px solid #ff5722; */
@@ -121,20 +122,23 @@ nav {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px; /* Optional spacing between the two */
+  /* gap: 10px; */
+  /* Optional spacing between the two */
   margin-left: 0;
 }
 
 #h1 {
-  color: #ef0014; /* Red or any color you like */
-  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color: #00e14f;
+  /* Red or any color you like */
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-size: 1.6em;
   margin: 0;
 }
 
 #h2 {
-  color: #20d126; /* Blue or another color */
-  font-family: 'Times New Roman', Times, serif;
+  color: rgb(255, 123, 0);
+  /* Blue or another color */
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-size: 1.6em;
   margin: 0;
 }
@@ -917,7 +921,8 @@ app-content button:hover {
 }
 
 /* New User Reviews : */
-.userReviews, #search-result {
+.userReviews,
+#search-result {
   display: flex;
   justify-content: center;
   align-items: center;
