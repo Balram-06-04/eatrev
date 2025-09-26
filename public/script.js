@@ -393,13 +393,15 @@ document.getElementById("searchBtn").addEventListener("click", async () => {
 
 
 function getLocation(location, latitude, longitude) {
-  if (latitude && longitude) {
+  // Check if both latitude and longitude are valid numbers
+  if (typeof latitude === "number" && typeof longitude === "number") {
     window.open(`https://www.google.com/maps?q=${latitude},${longitude}`, "_blank");
   } else {
-    // Fallback to text-based location
+    // Fallback: open using text location entered by user
     window.open(`https://www.google.com/maps?q=${encodeURIComponent(location)}`, "_blank");
   }
 }
+
 
 
 
