@@ -393,14 +393,19 @@ document.getElementById("searchBtn").addEventListener("click", async () => {
 
 
 function getLocation(location, latitude, longitude) {
-  // Check if both latitude and longitude are valid numbers
-  if (typeof latitude === "number" && typeof longitude === "number") {
-    window.open(`https://www.google.com/maps?q=${latitude},${longitude}`, "_blank");
+  // Convert to numbers (if they are strings)
+  const lat = Number(latitude);
+  const lon = Number(longitude);
+
+  // Check if both are valid numbers
+  if (!isNaN(lat) && !isNaN(lon)) {
+    window.open(`https://www.google.com/maps?q=${lat},${lon}`, "_blank");
   } else {
-    // Fallback: open using text location entered by user
+    // Fallback to text-based location
     window.open(`https://www.google.com/maps?q=${encodeURIComponent(location)}`, "_blank");
   }
 }
+
 
 
 
