@@ -226,12 +226,20 @@ async function loadUsers() {
           <p>Dishes : ${rev.dishName}</p>
           <p>Review : ${rev.reviewText}</p>
           <p>Hygiene : ${rev.hygieneCondition}</p>
-          <p>
-            ${new Date(rev.createdAt).getDate()}/
-            ${new Date(rev.createdAt).getMonth() + 1}/
-            ${new Date(rev.createdAt).getFullYear()} ,
-            ${new Date(rev.createdAt).getHours()}:${String(new Date(rev.createdAt).getMinutes()).padStart(2, '0')}
-          </p>
+          <p>Rating : ${rev.overallRating}</p>
+              <p>
+                ${new Date(rev.createdAt).getDate()}/
+                ${new Date(rev.createdAt).getMonth() + 1}/
+                ${new Date(rev.createdAt).getFullYear()} ,
+                ${(() => {
+                    const date = new Date(rev.createdAt);
+                    let hours = date.getHours();
+                    const minutes = String(date.getMinutes()).padStart(2, "0");
+                    const ampm = hours >= 12 ? "PM" : "AM";
+                    hours = hours % 12 || 12; // convert 0 → 12, 13 → 1
+                    return `${hours}:${minutes} ${ampm}`;
+                })()}
+              </p>
 
           <div class="giveReview">
             <div class="satisfyButton">
@@ -323,6 +331,7 @@ document.getElementById("searchBtn").addEventListener("click", async () => {
               <p>Dishes : ${rev.dishName}</p>
               <p>Review : ${rev.reviewText}</p>
               <p>Hygiene : ${rev.hygieneCondition}</p>
+               <p>Rating : ${rev.overallRating}</p>
                <p>
                 ${new Date(rev.createdAt).getDate()}/
                 ${new Date(rev.createdAt).getMonth() + 1}/
